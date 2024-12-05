@@ -1,9 +1,30 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import NavDownBox from './NavDownBox'
+import gsap from 'gsap'
+
 
 const Navbar = () => {
-    const [navcon, setNavcon] = useState(false)
+    const [navcon, setNavcon] = useState(true)
+    
+    useEffect(() => {
+        const handleScroll = () => {
+          // Check if the page has scrolled past 200px
+          if (window.scrollY > 200) {
+            setNavcon(false);
+          } else {
+            setNavcon(true);
+          }
+        };
+    
+        // Attach the scroll event listener
+        window.addEventListener('scroll', handleScroll);
+    
+        // Clean up the event listener on component unmount
+        return () => {
+          window.removeEventListener('scroll', handleScroll);
+        };
+      }, []);
 
     const [first, setFirst] = useState(false)
     const [second, setSecond] = useState(false)
@@ -22,7 +43,7 @@ const Navbar = () => {
     }
     return (
         <>
-            <header>
+            <header className='top-0 w-screen fixed' >
                 <nav className='mx-9 my-5 font-semibold '>
                     <div className='flex justify-between'>
 
@@ -35,8 +56,8 @@ const Navbar = () => {
 
                         {/* second */}
                         {navcon ?
-                            (<div className='flex gap-4 h-full relative ml-48 pt-2'>
-                                <div className='flex gap-3 text-lg'>
+                            (<div className='flex gap-4 h-full relative  pt-2 lg:visible'>
+                                <div className='flex gap-3 text-lg max-lg:invisible'>
                                     <div>
                                         <button className='w-16 py-1'>Stays</button>
                                     </div>
@@ -46,7 +67,7 @@ const Navbar = () => {
                                 </div>
 
                                 {/* second Down */}
-                                <div className="absolute top-20 -left-[25vw] outline outline-1 outline-slate-200 rounded-full shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] font-medium p-0">
+                                <div className="max-lg:invisible absolute top-20 -left-[25vw] outline outline-1 outline-slate-200 rounded-full shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] font-medium p-0">
                                     <div className='  w-[66vw] flex items-center h-20'>
                                         <div onMouseEnter={() => setFirst(true)} onMouseLeave={() => setFirst(false)} className='flex  h-full w-fit hover:bg-slate-300 rounded-full pl-10 py-3'>
                                             <div className="">
@@ -114,7 +135,7 @@ const Navbar = () => {
                         </div>
                     </div>
                 </nav>
-                <NavDownBox/>
+                {/* <NavDownBox/> */}
             </header>
         </>
     )
