@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import Home from './components/pages/Home.jsx';
 import SignIn from './components/authrization/SignIn.jsx';
+import NotFound from './components/pages/NotFound.jsx';
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       }
     ]
   },
+  {
+    path:'*',
+    element: <NotFound/>
+  }
 ]);
 
 createRoot(document.getElementById('root')).render(

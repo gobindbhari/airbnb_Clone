@@ -4,7 +4,7 @@ import Card from '../cards/Card'
 const Home = () => {
   return (
    <>
-    <div className='h-[200vw] mt-[10vh]'>
+    <div className='h-[30vw] mt-[45vh]'>
         <Card
           //  key={index}
           //  title={title}
