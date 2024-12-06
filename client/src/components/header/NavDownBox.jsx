@@ -66,7 +66,7 @@ const NavDownBox = () => {
   ];
   
     return (
-        <div className='border-t-2 border-b-2 py-4'>
+        <div className='border-t-2 border-b-2 py-4 z-0'>
 
             <Swiper
         slidesPerView={15}

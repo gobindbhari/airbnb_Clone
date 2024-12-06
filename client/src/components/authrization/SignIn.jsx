@@ -1,14 +1,17 @@
-import React from 'react'
+import React,{useState} from 'react'
 
 const SignIn = () => {
+    const [show, setShow] = useState(true)
     return (
-        <div>
-            <section className="py-4 md:py-8 dark:bg-gray-800 ">
+        <>
+        {show ? 
+           ( <div className="absolute w-[100%] h-[100%]  py-4 md:py-8 bg-[#00000015] z-50 ">
 
-                <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 ">
+                <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0 mt-20">
 
                     <div
                         className="w-full bg-white rounded-lg shadow-[rgba(0,_0,_0,_0.4)_0px_30px_90px] dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700 ">
+                            <button onClick={()=> setShow(false)} className="mt-1 ml-1 {}"><img src="public\images\signin\cancel.svg" alt="" /></button>
                         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                                 Sign in to your account
@@ -52,8 +55,8 @@ const SignIn = () => {
                     </div>
                 </div>
 
-            </section>
-        </div>
+            </div>):''}
+            </>
     )
 }
 
