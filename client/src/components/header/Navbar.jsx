@@ -13,7 +13,7 @@ const Navbar = () => {
     useEffect(() => {
         const handleScroll = () => {
             // Check if the page has scrolled past 200px
-            if (window.scrollY > 200) {
+            if (window.scrollY > 50) {
                 setNavcon(false);
             } else {
                 setNavcon(true);
@@ -186,9 +186,10 @@ const Navbar = () => {
                 </nav>
                 <NavDownBox />
             </header>
+                {signShow ? (
             <div className="absolute h-[100%] w-[100%] top-0">
-                {signShow ? <SignIn/> : null}
-            </div>
+            <SignIn/>
+            </div>)  : null}
         </>
     )
 }

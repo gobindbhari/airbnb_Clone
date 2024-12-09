@@ -10,6 +10,7 @@ import {
 import Home from './components/pages/Home.jsx';
 import SignIn from './components/authrization/SignIn.jsx';
 import NotFound from './components/pages/NotFound.jsx';
+import PostForm from './components/pages/PostForm.jsx';
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path:'/signin',
         element : <SignIn/>
+      },
+      {
+        path:'/post-form',
+        element : <PostForm/>
       }
     ]
   },

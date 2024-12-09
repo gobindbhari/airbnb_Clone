@@ -22,6 +22,12 @@ const PostSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    category: {
+        type: String,
+        required: true,
+        enum:["Icons", "Cabins", "Country Sides", "Icons", "National Parks", "Farms", "Amazing Pools", "Amazing Views", "Rooms", "Tree Houses", "Luxe", "Beach", "Historical Homes", "Mansions", "Domes", "Castles", "Lake Front", "Tiny Houses", "Beach Fronts", "Lakes", "Islands", "Design", "Off-the-Grid", "Top of the World", "Bed And Breakfasts", "Tropical", "Trending", "Top Cities", "Camping", "Desert", "Caves", "Golfing", "A-Frames", "Arctics", "Containers", "Earth Homes", "Boats", "Creative Spaces", "Chefs Kitchens", "Skiing", "Play", "New", "Surfing", "Houseboats", "Minsus", "Ski In/Out", "Yurts"]
+
+    },
     availableDates: {
         startDate:Date,
         endDate:Date,
