@@ -10,15 +10,17 @@ const UserSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    role:{
-        type : String,
-        enum:['buyer','seller'],
-        default : 'buyer'
+    phoneNumber:{
+        type:Number,
+        required:true
     },
     createdAt:{
         type:Date,
         default: Date.now
     }
+},{
+    timestamps:true
 })
 
-export const User = mongoose.model('User',UserSchema)
+const User = mongoose.model('User',UserSchema)
+module.exports = User
