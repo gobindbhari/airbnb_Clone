@@ -22,7 +22,7 @@ const Home = () => {
            title={e.title}
            pricePerNight={e.pricePerNight}
            description={e.description}
-          //  images={e.images}
+           images={e.images}
         /> })}
     </div>
    </>

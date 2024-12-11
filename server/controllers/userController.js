@@ -10,7 +10,7 @@ const sceret_key = process.env.JWTSECERET
 const signup = async (req, res) => {
     try {
         console.log(req.body,"dlksdsla;da")
-        const { email, password, role } = req.body;
+        const { email, password } = req.body;
         if (!email || !password) {
             return res.status(400).json({ message: 'All field are required' });
         }
@@ -19,8 +19,7 @@ const signup = async (req, res) => {
         const hashPassword = await bcrypt.hash(password, 10)
         const newuser = await User.create({
             email: email,
-            password: hashPassword,
-            role: role
+            password: hashPassword
         })
         console.log(newuser)
         return res.status(201).json({ message: 'Account successfly created' })
