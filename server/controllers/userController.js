@@ -1,6 +1,7 @@
 const { default: mongoose } = require("mongoose");
-const { User } = require("../models/userModel");
 const jwt = require('jsonwebtoken');
+const User = require("../models/userModel");
+const bcrypt = require("bcryptjs")
 require('dotenv').config();
 
 const sceret_key = process.env.JWTSECERET
@@ -8,11 +9,12 @@ const sceret_key = process.env.JWTSECERET
 
 const signup = async (req, res) => {
     try {
+        console.log(req.body,"dlksdsla;da")
         const { email, password, role } = req.body;
         if (!email || !password) {
             return res.status(400).json({ message: 'All field are required' });
         }
-        const existUser = User.findOne({ email })
+        const existUser = await User.findOne({ email:email })
         if (existUser) return res.json({ message: 'User is already have Account' })
         const hashPassword = await bcrypt.hash(password, 10)
         const newuser = await User.create({

@@ -44,7 +44,7 @@ const Navbar = () => {
     return (
         <>
             <header className='top-0 w-screen fixed bg-white z-10' >
-                <nav className='mx-9 my-5 font-semibold '>
+                <nav className='mx-9 my-5 font-semibold  max-md:mr-2 max-md:ml-3 '>
                     <div className='flex justify-between'>
 
                         {/* first */}
@@ -142,40 +142,40 @@ const Navbar = () => {
                     {/* second Down */}
                         <div className={navcon ? 'visible': 'hidden' }>
                         <div className="w-[67vw] mx-auto max-lg:hidden ">
-                            <div className="max-lg:invisible  top-20 -left-[25vw] outline outline-1 outline-slate-200 rounded-full shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] font-medium">
-                                <div className='  w-[67vw] flex items-center h-[70px]'>
+                            <div className="max-lg:invisible  top-20 -left-[25vw] outline outline-1 outline-slate-200 rounded-full shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] font-medium w-fit">
+                                <div className='  w-fit flex items-center h-[70px]'>
                                 
-                                    <div onMouseEnter={() => setFirst(true)} onMouseLeave={() => setFirst(false)} className='flex  h-full w-[40%] hover:bg-slate-300 rounded-full pl-10 py-2'>
+                                    <div onMouseEnter={() => setFirst(true)} onMouseLeave={() => setFirst(false)} className='flex  h-full w-fit hover:bg-slate-300 rounded-full pl-10 py-2'>
                                         <div className="">
                                             <div>Where</div>
-                                            <input className='h-4 w-52 outline-none font-normal bg-transparent' type="text" placeholder='Search destinatios' />
+                                            <input className='h-4 max-w-fit outline-none font-normal bg-transparent' type="text" placeholder='Search destinatios' />
                                         </div>
-                                        <div style={hoverEffect} className="border-r-2 h-[80%] w-1 my-auto lg:hidden"></div>
+                                        <div style={hoverEffect} className="border-r-2 h-[80%] w-1 my-auto max-lg:hidden"></div>
                                     </div>
 
-                                    <div onMouseEnter={() => { setFirst(true); setSecond(true) }} onMouseLeave={() => { setFirst(false); setSecond(false) }} className=' flex pl-10 py-3 hover:bg-slate-300 rounded-full h-full'>
+                                    <div onMouseEnter={() => { setFirst(true); setSecond(true) }} onMouseLeave={() => { setFirst(false); setSecond(false) }} className=' flex pl-4 py-3 hover:bg-slate-300 rounded-full h-full'>
                                         <div>
                                             <div>Chech in</div>
                                             <input className='outline-none font-normal h-4 w-28 bg-transparent' placeholder='Add dates' type="text" />
                                         </div>
-                                        <div style={hoverSecond} className="border-r-2 h-[80%] w-1 my-auto lg:hidden"></div>
+                                        <div style={hoverSecond} className="border-r-2 h-[80%] w-1 my-auto max-lg:hidden"></div>
                                     </div>
 
-                                    <div onMouseEnter={() => { setThrid(true); setSecond(true) }} onMouseLeave={() => { setThrid(false); setSecond(false) }} className='flex rounded-full pl-10 py-3 h-full hover:bg-slate-300'>
+                                    <div onMouseEnter={() => { setThrid(true); setSecond(true) }} onMouseLeave={() => { setThrid(false); setSecond(false) }} className='flex rounded-full pl-4 py-3 h-full hover:bg-slate-300'>
                                         <div className="pr-10">
                                             <div>Chech out</div>
                                             <input className='outline-none font-normal h-4 w-20 bg-transparent' placeholder='Add dates' type="text" />
                                         </div>
-                                        <div style={hoverThrid} className="border-r-2 h-[80%] w-1 my-auto lg:hidden"></div>
+                                        <div style={hoverThrid} className="border-r-2 h-[80%] w-1 my-auto max-lg:hidden"></div>
                                     </div>
 
-                                    <div onMouseEnter={() => setThrid(true)} onMouseLeave={() => setThrid(false)} className='flex gap-4 pl-10 py-2 h-full hover:bg-slate-300 rounded-full w-full'>
+                                    <div onMouseEnter={() => setThrid(true)} onMouseLeave={() => setThrid(false)} className='flex gap-2 px-4 py-2 h-full hover:bg-slate-300 rounded-full w-fit'>
                                         <div>
                                             <div>Who</div>
-                                            <input className='outline-none font-normal h-4 w-[90%] bg-transparent' placeholder='Add guests' type="text" />
+                                            <input className='outline-none font-normal h-4 w-32 bg-transparent' placeholder='Add guests' type="text" />
                                         </div>
-                                        <div className='p-5 bg-red-600 rounded-full'>
-                                            <img src="images/navbar/search.svg" alt="" />
+                                        <div className=' bg-red-600 rounded-full flex justify-center'>
+                                            <img className='scale-50' src="images/navbar/search.svg" alt="" />
                                         </div>
                                     </div>
                                 </div>

@@ -34,4 +34,24 @@ const createPost = async (req,res) => {
 }
 
 
-module.exports = {createPost}
+const getAllPost = async (req,res) => {
+    try {
+        const data = await User.find()
+        return res.send(data)
+    } catch (error) {
+        
+    }    
+}
+
+const postById = async (req,res) => {
+    try {
+        const {id}= req.params
+        const data = await Post.findById(id)
+        return res.send(data)
+    } catch (error) {
+        
+    }    
+}
+
+
+module.exports = {createPost, getAllPost, postById}
