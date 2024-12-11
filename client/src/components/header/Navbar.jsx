@@ -116,7 +116,7 @@ const Navbar = () => {
                                                 Sign in
                                             </button>
                                             <NavLink
-                                                to="/airbnb-your-home"
+                                                to="/host-home"
                                                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                             >
                                                 Airbnb your home
@@ -190,6 +190,7 @@ const Navbar = () => {
             <div className="absolute h-[100%] w-[100%] top-0">
             <SignIn/>
             </div>)  : null}
+            
         </>
     )
 }

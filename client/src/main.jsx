@@ -26,7 +26,7 @@ const router = createBrowserRouter([
         element : <SignIn/>
       },
       {
-        path:'/post-form',
+        path:'/host-home',
         element : <PostForm/>
       }
     ]
