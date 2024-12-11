@@ -1,15 +1,12 @@
 import React, { useRef, useState } from 'react';
-// Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 import '../../App.css'
 
-// import required modules
 import { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper/modules';
 
 
@@ -66,7 +63,7 @@ const NavDownBox = () => {
   ];
   
     return (
-        <div className='border-t-2 border-b-2 py-4 z-0'>
+        <div className='border-t-2 border-b-2 py-4 z-0 '>
 
             <Swiper
         slidesPerView={15}
@@ -84,8 +81,8 @@ const NavDownBox = () => {
         {slides.map((slide, index) => (
         <SwiperSlide key={index}>
           <div className="group cursor-pointer">
-          <img className='group p-6 max-lg:p-3 max-xl:p-4 font-normal -m-3 ml-[2px]' src={slide.src} alt={slide.label} />
-          <div className="text-xs font-semibold -m-3 group-hover:border-t-2 hover:border-t-2" >{slide.label}</div>
+          <img className='group p-6 max-lg:p-3 scale-[100%] max-sm:p-0 max-md:p-2 max-xl:p-4 font-normal max-lg:text-base -m-3 ml-[2px]' src={slide.src} alt={slide.label} />
+          <div className="text-xs font-semibold  group-hover:border-t-2 hover:border-t-2" >{slide.label}</div>
           </div>
         </SwiperSlide>
       ))}
