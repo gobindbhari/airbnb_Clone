@@ -22,9 +22,15 @@ const PostForm = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = async (data) => {
+        debugger
         console.log("Form Data:", data);
-        await axios.post(`http://localhost:5500/post/create`,data)
-        notify
+        const response = await axios.post(`http://localhost:5500/post/create`,data)
+        if (response ) {
+            notify()
+        } else {
+            alert('Failed');
+        }        console.log('clickedddddddddddddddddddddddddddddddddddddd')
+        
     };
 
     return (

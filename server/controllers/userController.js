@@ -12,11 +12,16 @@ const signup = async (req, res) => {
         console.log(req.body,"dlksdsla;da")
         const { email, password } = req.body;
         if (!email || !password) {
-            return res.status(400).json({ message: 'All field are required' });
+            console.log('test is passeddddddd')
+            return res.status(400).send({ message: 'All field are required' });
         }
         const existUser = await User.findOne({ email:email })
-        if (existUser) return res.json({ message: 'User is already have Account' })
+        console.log(existUser,'existuserrrrrrrrrrrrrr')
+        if (existUser) {
+            console.log('User is already have Account')
+            return res.status(400).json({  message: 'User is already have Account' })}
         const hashPassword = await bcrypt.hash(password, 10)
+        console.log(hashPassword,'000000000000000000000000')
         const newuser = await User.create({
             email: email,
             password: hashPassword

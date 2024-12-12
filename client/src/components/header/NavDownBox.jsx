@@ -82,7 +82,7 @@ const NavDownBox = () => {
         <SwiperSlide key={index}>
           <div className="group cursor-pointer">
           <img className='group p-6 max-lg:p-3  max-sm:p-0 max-md:p-2 max-xl:p-4 font-normal max-lg:text-base -m-3 ml-[2px]' src={slide.src} alt={slide.label} />
-          <div className="text-xs font-semibold  group-hover:border-t-2 hover:border-t-2" >{slide.label}</div>
+          <div className="text-xs font-semibold  group-hover:border-t-2 hover:border-t-2 duration-100" >{slide.label}</div>
           </div>
         </SwiperSlide>
       ))}

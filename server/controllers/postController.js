@@ -10,17 +10,19 @@ const createPost = async (req,res) => {
         const { title, description, pricePerNight, availableDates, propertyDetails, address, category } = req.body;
             const {bedrooms,bathrooms,guests,beds,kitchen} = propertyDetails
             const {pincode,country,street,state,town,district} = address
-        if (!title || !description || !pricePerNight || !id || !category) {
+            const {startDate,endDate} = availableDates
+        if (!title || !description || !pricePerNight || !category) {
             return res.status(400).json({ message: 'All fields are required' });
         }
         const user = await User.findById(id)
-        if (!user) {
-            return res.status(404).json({ message: 'User not found' });
-        }
+        // if (!user) {
+        //     console.log( 'User not found')
+        //     return res.status(404).json({ message: 'User not found' });
+        // }
         // const imagePaths = req.files.map(file => file.path);
         const newPost = await Post.create({
             title,
-            images:req.file,
+            // images:imagePaths,
             description,
             pricePerNight,
             availableDates,
@@ -31,12 +33,13 @@ const createPost = async (req,res) => {
                pincode,country,street,state,town,district
             },
             category,
-            hostedBy:id,
+            // hostedBy:id,
             availableDates: {
                 startDate,
                 endDate,
             },
         });
+        console.log(newPost)
         return res.status(201).json({ message: 'Post successfully created', post: newPost });
     } catch (error) {
         console.error('Error creating post:', error);

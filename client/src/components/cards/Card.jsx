@@ -2,6 +2,7 @@ import React from "react";
 
 const Card = ({ title, description, pricePerNight, images }) => {
 
+  console.log(images)
   const handle = ()=>{
 
   }
@@ -9,8 +10,7 @@ const Card = ({ title, description, pricePerNight, images }) => {
     <div onClick={()=>handle()} className="max-w-xs bg-white rounded-lg shadow-md overflow-hidden mx-1">
       <div className="relative">
         <img
-          src={images}
-          // src='https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTEzMTA4OTQ5ODA0MDcwMTE4Mw%3D%3D/original/a766e0e9-1e6f-4b88-b8d5-ce12375c6de8.png?im_w=1440&im_q=highq'
+          src={!images.length === 0 ? images :'https://img.freepik.com/free-photo/empire-state-building-seen-from-apartment_23-2150897639.jpg?t=st=1733895365~exp=1733898965~hmac=2dc6875f72e62732e7bacfeaa4b1633c774706e2688330427a64776684140f0a&w=360'}
           alt="Room"
           className="w-full h-80 object-cover rounded-xl hover:scale-110 duration-300 "
         />

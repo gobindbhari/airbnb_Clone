@@ -11,6 +11,7 @@ import Home from './components/pages/Home.jsx';
 import SignIn from './components/authrization/SignIn.jsx';
 import NotFound from './components/pages/NotFound.jsx';
 import PostForm from './components/pages/PostForm.jsx';
+import SignUp from './components/pages/SignUp.jsx';
 
 const router = createBrowserRouter([
   {
@@ -28,7 +29,11 @@ const router = createBrowserRouter([
       {
         path:'/host-home',
         element : <PostForm/>
-      }
+      },
+      {
+        path:'/signup',
+        element : <SignUp/>
+      },
     ]
   },
   {

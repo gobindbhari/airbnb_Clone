@@ -4,7 +4,7 @@ const { createPost, getAllPost, postById } = require('../controllers/postControl
 
 const postRouter = express.Router()
 
-postRouter.route('/create/:id').post(upload.array('post-image'),createPost)
+postRouter.route('/create/').post(upload.array('post-image'),createPost)
 
 postRouter.route('/allpost').get(getAllPost)
 

@@ -3,12 +3,14 @@ import { NavLink } from 'react-router-dom'
 import NavDownBox from './NavDownBox'
 import gsap from 'gsap'
 import SignIn from '../authrization/SignIn'
+import SignUp from '../pages/SignUp'
 
 
 const Navbar = () => {
     const [navcon, setNavcon] = useState(true)
     const [isOpen, setIsOpen] = useState(false)
     const [signShow, setSignShow] = useState(false)
+    const [signupShow, setSignupShow] = useState(false)
 
     useEffect(() => {
         const handleScroll = () => {
@@ -91,7 +93,7 @@ const Navbar = () => {
                                 <h3 className='m-auto hover:bg-slate-100 rounded-3xl px-3 py-2'>Airbnb your home </h3>
                                 <button className='hover:bg-slate-100 rounded-full px-2'><img className='h-4 m-auto' src="images/navbar/earth.svg" alt="" /></button>
                             </div>
-                            <button onClick={() => {setIsOpen(isOpen ? false : true), setSignShow(false)}} className=' flex gap-2 rounded-full px-4 py-2 h-12 outline outline-slate-300 outline-1 hover:shadow-[0_3px_10px_rgb(0,0,0,0.2)]'>
+                            <button onClick={() => {setIsOpen(isOpen ? false : true), setSignShow(false),setSignupShow(false)}} className=' flex gap-2 rounded-full px-4 py-2 h-12 outline outline-slate-300 outline-1 hover:shadow-[0_3px_10px_rgb(0,0,0,0.2)]'>
                                 <img className='h-4 m-auto' src="images/navbar/threelines.svg" alt="" />
                                 <img className='h-8 rounded-full bg-slate-400 p-1' src="images/navbar/profile.svg" alt="" />
                             </button>
@@ -100,12 +102,12 @@ const Navbar = () => {
                                 {isOpen && (
                                     <div className="absolute right-10 z-10 mt-16 w-48 origin-top-right bg-white border border-gray-300 rounded-md shadow-lg">
                                         <div className="py-1">
-                                            <NavLink
-                                                to="/signup"
+                                            <button
+                                                 onClick={() => setSignupShow(true)}
                                                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                             >
                                                 Sign up
-                                            </NavLink>
+                                            </button>
                                             <button
                                                 onClick={() => setSignShow(true)}
                                                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
@@ -140,12 +142,12 @@ const Navbar = () => {
 
 
                     {/* second Down */}
-                        <div className={navcon ? 'visible': 'hidden' }>
-                        <div className="w-[67vw] mx-auto max-lg:hidden ">
+                        <div className={navcon ? 'visible': 'hidden ' }>
+                        <div className="w-[67vw] mx-auto max-lg:hidden  ">
                             <div className="max-lg:invisible  top-20 -left-[25vw] outline outline-1 outline-slate-200 rounded-full shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] font-medium w-fit">
                                 <div className='  w-fit flex items-center h-[70px]'>
                                 
-                                    <div onMouseEnter={() => setFirst(true)} onMouseLeave={() => setFirst(false)} className='flex  h-full w-fit hover:bg-slate-300 rounded-full pl-10 py-2'>
+                                    <div onMouseEnter={() => setFirst(true)} onMouseLeave={() => setFirst(false)} className='flex  h-full w-fit hover:bg-slate-200 rounded-full pl-10 py-2 duration-200'>
                                         <div className="">
                                             <div>Where</div>
                                             <input className='h-4 max-w-fit outline-none font-normal bg-transparent' type="text" placeholder='Search destinatios' />
@@ -153,7 +155,7 @@ const Navbar = () => {
                                         <div style={hoverEffect} className="border-r-2 h-[80%] w-1 my-auto max-lg:hidden"></div>
                                     </div>
 
-                                    <div onMouseEnter={() => { setFirst(true); setSecond(true) }} onMouseLeave={() => { setFirst(false); setSecond(false) }} className=' flex pl-4 py-3 hover:bg-slate-300 rounded-full h-full'>
+                                    <div onMouseEnter={() => { setFirst(true); setSecond(true) }} onMouseLeave={() => { setFirst(false); setSecond(false) }} className=' flex pl-4 py-3 hover:bg-slate-200 rounded-full h-full  duration-200'>
                                         <div>
                                             <div>Chech in</div>
                                             <input className='outline-none font-normal h-4 w-28 bg-transparent' placeholder='Add dates' type="text" />
@@ -161,7 +163,7 @@ const Navbar = () => {
                                         <div style={hoverSecond} className="border-r-2 h-[80%] w-1 my-auto max-lg:hidden"></div>
                                     </div>
 
-                                    <div onMouseEnter={() => { setThrid(true); setSecond(true) }} onMouseLeave={() => { setThrid(false); setSecond(false) }} className='flex rounded-full pl-4 py-3 h-full hover:bg-slate-300'>
+                                    <div onMouseEnter={() => { setThrid(true); setSecond(true) }} onMouseLeave={() => { setThrid(false); setSecond(false) }} className='flex rounded-full pl-4 py-3 h-full hover:bg-slate-200 duration-200'>
                                         <div className="pr-10">
                                             <div>Chech out</div>
                                             <input className='outline-none font-normal h-4 w-20 bg-transparent' placeholder='Add dates' type="text" />
@@ -169,7 +171,7 @@ const Navbar = () => {
                                         <div style={hoverThrid} className="border-r-2 h-[80%] w-1 my-auto max-lg:hidden"></div>
                                     </div>
 
-                                    <div onMouseEnter={() => setThrid(true)} onMouseLeave={() => setThrid(false)} className='flex gap-2 px-4 py-2 h-full hover:bg-slate-300 rounded-full w-fit'>
+                                    <div onMouseEnter={() => setThrid(true)} onMouseLeave={() => setThrid(false)} className='flex gap-2 px-4 py-2 h-full hover:bg-slate-200 rounded-full w-fit duration-200'>
                                         <div>
                                             <div>Who</div>
                                             <input className='outline-none font-normal h-4 w-32 bg-transparent' placeholder='Add guests' type="text" />
@@ -190,6 +192,10 @@ const Navbar = () => {
             <SignIn/>
             </div>)  : null}
             
+                {signupShow ? (
+            <div className="absolute h-[100%] w-[100%] top-0 ">
+            <SignUp/>
+            </div>)  : null}
         </>
     )
 }
