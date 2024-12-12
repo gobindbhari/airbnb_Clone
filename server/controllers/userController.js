@@ -9,19 +9,20 @@ const sceret_key = process.env.JWTSECERET
 
 const signup = async (req, res) => {
     try {
-        console.log(req.body,"dlksdsla;da")
+        console.log(req.body, "dlksdsla;da")
         const { email, password } = req.body;
         if (!email || !password) {
             console.log('test is passeddddddd')
             return res.status(400).send({ message: 'All field are required' });
         }
-        const existUser = await User.findOne({ email:email })
-        console.log(existUser,'existuserrrrrrrrrrrrrr')
+        const existUser = await User.findOne({ email: email })
+        console.log(existUser, 'existuserrrrrrrrrrrrrr')
         if (existUser) {
             console.log('User is already have Account')
-            return res.status(400).json({  message: 'User is already have Account' })}
+            return res.status(400).json({ message: 'User is already have Account' })
+        }
         const hashPassword = await bcrypt.hash(password, 10)
-        console.log(hashPassword,'000000000000000000000000')
+        console.log(hashPassword, '000000000000000000000000')
         const newuser = await User.create({
             email: email,
             password: hashPassword
@@ -39,27 +40,35 @@ const signin = async (req, res) => {
     try {
         const { email, password } = req.body;
         if (!email || !password) {
+            console.log('All field are required')
             return res.status(400).json({ message: 'All field are required' });
         }
         const existUser = await User.findOne({ email })
+        console.log(existUser)
         if (!existUser) return res.status(404).json({ message: 'User have not Account' })
-        const { _id, role } = existUser
+        const { _id } = existUser
         const checkPW = await bcrypt.compare(password, existUser.password);
         if (!checkPW) return res.status(400).json({ message: 'Password is invalid Please try again' })
         const payload = {
             "email": email,
-            "_id" : _id,
-            "role": role
+            "_id": _id
         }
         const token = await jwt.sign(payload, sceret_key, { expiresIn: '1h' })
-        return res.status(200).json({ message: 'successfly Sign-in', token })
+        return res.status(200)
+        .json({ message: 'Successfully Sign-in'})
+        .cookie('authToken',token,{
+            httpOnly:true,
+            secure:false,   // true in production
+            sameSite:'Strict',
+            maxAge: 7 * 24 * 60 * 60 * 1000
+        })
     } catch (error) {
         console.log('error in signin controller please check', error)
         return res.status(500).json({ message: 'Something went wrong. Please try again later' });
     }
 }
 
-const updateUser = async (req,res) => {
+const updateUser = async (req, res) => {
     try {
         const { email, password, role } = req.body;
         if (!email) {
@@ -67,14 +76,14 @@ const updateUser = async (req,res) => {
         }
         const existUser = await User.findOne({ email })
         if (!existUser) return res.status(404).json({ message: 'User have not Account' })
-            let hashPassword
-        if (password) { 
-            hashPassword = await bcrypt.hash(password, 10) 
+        let hashPassword
+        if (password) {
+            hashPassword = await bcrypt.hash(password, 10)
         }
-        const newuser = await User.findByIdAndUpdate( existUser._id,{    
+        const newuser = await User.findByIdAndUpdate(existUser._id, {
             'password': hashPassword ? hashPassword : existUser.password,
             'role': role
-        },{new:true})
+        }, { new: true })
         console.log(newuser)
         return res.status(200).json({ message: 'Account successfly Updated' })
 

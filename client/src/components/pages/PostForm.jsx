@@ -16,7 +16,7 @@ const PostForm = () => {
         "Surfing", "Houseboats", "Minsus", "Ski In/Out", "Yurts"
     ];
 
-    const notify = () => toast("Post is successfully created");
+    const notify = (e) => toast(e);
 
     
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -24,13 +24,12 @@ const PostForm = () => {
     const onSubmit = async (data) => {
         debugger
         console.log("Form Data:", data);
-        const response = await axios.post(`http://localhost:5500/post/create`,data)
-        if (response ) {
-            notify()
+        const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/post/create`,data)
+        if (response.status === 200 || response.status === 201 ) {
+            notify("Post is successfully created")
         } else {
-            alert('Failed');
-        }        console.log('clickedddddddddddddddddddddddddddddddddddddd')
-        
+            notify(response.data.message)
+        } 
     };
 
     return (
@@ -232,6 +231,7 @@ const PostForm = () => {
             >
                 Submit
             </button>
+            <ToastContainer/>
         </form>
     );
 };

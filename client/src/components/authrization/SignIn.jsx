@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import { useForm } from "react-hook-form"
 import { NavLink } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios';
 
 
 
@@ -8,16 +11,25 @@ const SignIn = () => {
     const [show, setShow] = useState(true)
     const [typePW, setTypePW] = useState(true)
 
-    const {
-        register,
-        handleSubmit,
-        watch,
-        formState: { errors },
-    } = useForm()
+    const {register,handleSubmit,watch,formState: { errors },} = useForm()
+
+    const notify = (e) => toast(e);
 
 
-    const onSubmit = (data) => {
-        console.log(data)
+    const onSubmit = async (data) => {
+           try {
+            debugger
+            console.log(data)
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/user/signin`,data, { withCredentials: true })
+            if(response.status === 200 || response.status === 201 ){
+                notify('successfully signin')
+                console.log(response.data)
+            }else{
+                notify(response.data.message)
+            }
+           } catch (error) {
+            console.log('error',error)
+           }
     }
 
     return (
@@ -52,7 +64,7 @@ const SignIn = () => {
                                             required: "Password is required" , 
                                             minLength:{value:8, message:'Password must be at least 8 characters long'},
                                             maxLength:{value:18, message:'Password must not exceed 18 characters'}
-                                        })} placeholder="••••••••" className="text-gray-900 bg-gray-50 sm:text-sm rounded-lg  block w-full p-2.5" />
+                                        })} placeholder="••••••••" className="text-gray-900 bg-gray-50 sm:text-sm rounded-lg outline-none block w-full p-2.5" />
                                         <button type='button' className='px-3' onClick={(event) => {
                                         event.preventDefault(); // Stops form submission
                                         setTypePW(!typePW);
@@ -71,6 +83,7 @@ const SignIn = () => {
                     </div>
 
                 </div>) : ''}
+                <ToastContainer/>
         </>
     )
 }
