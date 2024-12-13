@@ -54,14 +54,13 @@ const signin = async (req, res) => {
             "_id": _id
         }
         const token = await jwt.sign(payload, sceret_key, { expiresIn: '1h' })
-        return res.status(200)
-        .json({ message: 'Successfully Sign-in'})
-        .cookie('authToken',token,{
+        return res.status(200).cookie('authToken',token,{
             httpOnly:true,
             secure:false,   // true in production
             sameSite:'Strict',
             maxAge: 7 * 24 * 60 * 60 * 1000
-        })
+        }).json({ message: 'Successfully Sign-in'})
+
     } catch (error) {
         console.log('error in signin controller please check', error)
         return res.status(500).json({ message: 'Something went wrong. Please try again later' });

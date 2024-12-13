@@ -5,12 +5,20 @@ import gsap from 'gsap'
 import SignIn from '../authrization/SignIn'
 import SignUp from '../pages/SignUp'
 
+import { useSelector, useDispatch } from 'react-redux'
+import { setNotAllow, setAllow } from '../../redux/content/verify'
+
 
 const Navbar = () => {
     const [navcon, setNavcon] = useState(true)
     const [isOpen, setIsOpen] = useState(false)
     const [signShow, setSignShow] = useState(false)
     const [signupShow, setSignupShow] = useState(false)
+    const [valid, setValid] = useState(false)
+
+    const VerifyUser = useSelector((state) => state.VerifyUser)
+    const dispatch = useDispatch()
+    console.log(VerifyUser)
 
     useEffect(() => {
         const handleScroll = () => {
@@ -93,7 +101,7 @@ const Navbar = () => {
                                 <h3 className='m-auto hover:bg-slate-100 rounded-3xl px-3 py-2'>Airbnb your home </h3>
                                 <button className='hover:bg-slate-100 rounded-full px-2'><img className='h-4 m-auto' src="images/navbar/earth.svg" alt="" /></button>
                             </div>
-                            <button onClick={() => {setIsOpen(isOpen ? false : true), setSignShow(false),setSignupShow(false)}} className=' flex gap-2 rounded-full px-4 py-2 h-12 outline outline-slate-300 outline-1 hover:shadow-[0_3px_10px_rgb(0,0,0,0.2)]'>
+                            <button onClick={() => { setIsOpen(isOpen ? false : true), setSignShow(false), setSignupShow(false) }} className=' flex gap-2 rounded-full px-4 py-2 h-12 outline outline-slate-300 outline-1 hover:shadow-[0_3px_10px_rgb(0,0,0,0.2)]'>
                                 <img className='h-4 m-auto' src="images/navbar/threelines.svg" alt="" />
                                 <img className='h-8 rounded-full bg-slate-400 p-1' src="images/navbar/profile.svg" alt="" />
                             </button>
@@ -102,8 +110,8 @@ const Navbar = () => {
                                 {isOpen && (
                                     <div className="absolute right-10 z-10 mt-16 w-48 origin-top-right bg-white border border-gray-300 rounded-md shadow-lg">
                                         <div className="py-1">
-                                            <button
-                                                 onClick={() => setSignupShow(true)}
+                                            {!VerifyUser ? <> <button
+                                                onClick={() => setSignupShow(true)}
                                                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                             >
                                                 Sign up
@@ -113,7 +121,13 @@ const Navbar = () => {
                                                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                             >
                                                 Sign in
-                                            </button>
+                                            </button> </> : null}
+                                            {VerifyUser?<button
+                                                onClick={() => dispatch(setNotAllow())}
+                                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                            >
+                                                Log-out
+                                            </button> : null }
                                             <NavLink
                                                 to="/host-home"
                                                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
@@ -142,11 +156,11 @@ const Navbar = () => {
 
 
                     {/* second Down */}
-                        <div className={navcon ? 'visible': 'hidden ' }>
+                    <div className={navcon ? 'visible' : 'hidden '}>
                         <div className="w-[67vw] mx-auto max-lg:hidden  ">
                             <div className="max-lg:invisible  top-20 -left-[25vw] outline outline-1 outline-slate-200 rounded-full shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] font-medium w-fit">
                                 <div className='  w-fit flex items-center h-[70px]'>
-                                
+
                                     <div onMouseEnter={() => setFirst(true)} onMouseLeave={() => setFirst(false)} className='flex  h-full w-fit hover:bg-slate-200 rounded-full pl-10 py-2 duration-200'>
                                         <div className="">
                                             <div>Where</div>
@@ -183,19 +197,20 @@ const Navbar = () => {
                                 </div>
                             </div>
                         </div>
-                        </div>
+                    </div>
                 </nav>
                 <NavDownBox />
             </header>
-                {signShow ? (
-            <div className="absolute h-[100%] w-[100%] top-0">
-            <SignIn/>
-            </div>)  : null}
-            
-                {signupShow ? (
-            <div className="absolute h-[100%] w-[100%] top-0 ">
-            <SignUp/>
-            </div>)  : null}
+         {!VerifyUser ? <>
+          {signShow ? (
+                <div className="absolute h-[100%] w-[100%] top-0">
+                    <SignIn />
+                </div>) : null}
+            {signupShow ? (
+                <div className="absolute h-[100%] w-[100%] top-0 ">
+                    <SignUp />
+                </div>) : null}
+          </> : null }
         </>
     )
 }

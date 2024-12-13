@@ -5,11 +5,17 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 
+import { useSelector, useDispatch } from 'react-redux'
+import { setNotAllow, setAllow } from '../../redux/content/verify'
+
 
 
 const SignIn = () => {
     const [show, setShow] = useState(true)
     const [typePW, setTypePW] = useState(true)
+
+    const VerifyUser = useSelector((state) => state.VerifyUser)
+    const dispatch = useDispatch()
 
     const {register,handleSubmit,watch,formState: { errors },} = useForm()
 
@@ -21,9 +27,11 @@ const SignIn = () => {
             debugger
             console.log(data)
             const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/user/signin`,data, { withCredentials: true })
+            console.log(response)
             if(response.status === 200 || response.status === 201 ){
                 notify('successfully signin')
                 console.log(response.data)
+                dispatch(setAllow())
             }else{
                 notify(response.data.message)
             }
