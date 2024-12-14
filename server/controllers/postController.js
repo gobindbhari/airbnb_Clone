@@ -15,14 +15,18 @@ const createPost = async (req,res) => {
             return res.status(400).json({ message: 'All fields are required' });
         }
         const user = await User.findById(id)
-        // if (!user) {
-        //     console.log( 'User not found')
-        //     return res.status(404).json({ message: 'User not found' });
-        // }
+        if (!user) {
+            console.log( 'User not found')
+            return res.status(404).json({ message: 'User not found' });
+        }
+        // console.log(req.files, '==========')
+        // console.log(req.file, '00000000000==========')
+        // console.log(req, '------------------------------00000000000==========')
         // const imagePaths = req.files.map(file => file.path);
         const newPost = await Post.create({
             title,
             // images:imagePaths,
+            // images:req.file.path,
             description,
             pricePerNight,
             availableDates,
@@ -33,7 +37,7 @@ const createPost = async (req,res) => {
                pincode,country,street,state,town,district
             },
             category,
-            // hostedBy:id,
+            hostedBy:id,
             availableDates: {
                 startDate,
                 endDate,
@@ -60,7 +64,7 @@ const getAllPost = async (req,res) => {
 const postById = async (req,res) => {
     try {
         const {id}= req.params
-        const data = await Post.findById(id)
+        const data = await Post.findById(id).populate('hostedBy', '-password')
         return res.send(data)
     } catch (error) {
         

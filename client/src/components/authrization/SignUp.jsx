@@ -28,6 +28,7 @@ const SignUp = () => {
         console.log(response.data.message)
         if(response.status === 201 || response.status === 200 ){
             notify("Account is successfully created")
+            setfirst(false)
         }else{
             notify(response.data.message)
         }

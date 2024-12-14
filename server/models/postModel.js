@@ -5,11 +5,13 @@ const PostSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    images: [{
-        type: String,
-        // default:'https://img.freepik.com/free-photo/empire-state-building-seen-from-apartment_23-2150897639.jpg?t=st=1733895365~exp=1733898965~hmac=2dc6875f72e62732e7bacfeaa4b1633c774706e2688330427a64776684140f0a&w=360'
-        // required: true
-    }],
+    images: [String],
+    
+    // images: [{
+    //     type: String,
+    //     // default:'https://img.freepik.com/free-photo/empire-state-building-seen-from-apartment_23-2150897639.jpg?t=st=1733895365~exp=1733898965~hmac=2dc6875f72e62732e7bacfeaa4b1633c774706e2688330427a64776684140f0a&w=360'
+    //     // required: true
+    // }],
     description: {
         type: String,
         required: true

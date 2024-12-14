@@ -1,5 +1,5 @@
 const express = require('express')
-const { signup, signin, updateUser } = require('../controllers/userController')
+const { signup, signin, updateUser, getuser } = require('../controllers/userController')
 
 const userRoute = express.Router()
 
@@ -11,7 +11,9 @@ userRoute.route('/signin')
 
 userRoute.route('/update')
                 .put(updateUser)
-
+                
+userRoute.route('/:id')
+                .get(getuser)
 
 
 module.exports = userRoute

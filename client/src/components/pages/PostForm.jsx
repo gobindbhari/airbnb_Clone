@@ -1,8 +1,8 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
 import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
+import { useParams } from 'react-router-dom';
 
 
 const PostForm = () => {
@@ -17,19 +17,26 @@ const PostForm = () => {
     ];
 
     const notify = (e) => toast(e);
+    const {id} = useParams()
 
     
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = async (data) => {
         debugger
-        console.log("Form Data:", data);
-        const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/post/create`,data)
+        try {
+            const newData = { ...data, hostedby:id}
+        console.log("Form Data:", newData);
+        const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/post/create/${id}`,newData)
         if (response.status === 200 || response.status === 201 ) {
-            notify("Post is successfully created")
+            toast("Post is successfully created")
         } else {
-            notify(response.data.message)
+            console.log(response)
         } 
+    } catch (error) {
+        console.log(error)
+        toast(error.response.data.message)
+        }
     };
 
     return (
@@ -231,7 +238,6 @@ const PostForm = () => {
             >
                 Submit
             </button>
-            <ToastContainer/>
         </form>
     );
 };

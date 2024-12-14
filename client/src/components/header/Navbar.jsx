@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import NavDownBox from './NavDownBox'
 import gsap from 'gsap'
 import SignIn from '../authrization/SignIn'
-import SignUp from '../pages/SignUp'
+import SignUp from '../authrization/SignUp'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { setNotAllow, setAllow } from '../../redux/content/verify'
+import axios from 'axios'
 
 
 const Navbar = () => {
@@ -15,10 +16,36 @@ const Navbar = () => {
     const [signShow, setSignShow] = useState(false)
     const [signupShow, setSignupShow] = useState(false)
     const [valid, setValid] = useState(false)
+    const [id, setId] = useState()
+    const [just, setjust] = useState(0)
 
     const VerifyUser = useSelector((state) => state.VerifyUser)
     const dispatch = useDispatch()
     console.log(VerifyUser)
+
+    const navigate = useNavigate()
+
+
+    const getdata = async (e) => {
+    const User = await axios(`${import.meta.env.VITE_BACKEND_URL}/user/${e}`,{
+        withCredentials:true
+    })
+    console.log(User)
+        User ? dispatch(setAllow()) : dispatch(setNotAllow())
+    }
+    useEffect(() => {
+        let token = localStorage.getItem('token') || null
+        // console.log(token)
+        setId(token)
+        getdata(token)
+    },[dispatch])
+    
+    useEffect(() => {
+        let token = localStorage.getItem('token') || null
+        // console.log(token)
+        setId(token)
+        getdata(token)
+    },[])
 
     useEffect(() => {
         const handleScroll = () => {
@@ -51,6 +78,18 @@ const Navbar = () => {
         visibility: second ? 'hidden' : 'visible',
         visibility: thrid ? 'hidden' : 'visible'
     }
+
+    function handleLogout (){
+        localStorage.removeItem('token')
+        setIsOpen(false)
+        dispatch(setNotAllow()) 
+        setjust(just+1)
+    }
+
+    const handleClick = ()=>{
+        VerifyUser ? navigate(`/host-home/${id}`):(setSignShow(true),
+        setIsOpen(false))
+    }
     return (
         <>
             <header className='top-0 w-screen fixed bg-white z-10' >
@@ -60,7 +99,7 @@ const Navbar = () => {
                         {/* first */}
                         <div>
                             <NavLink to={'/'}>
-                                <img className='h-10 w-28 ' src="images/navbar/logo.svg" alt="" />
+                                <img className='h-10 w-28 ' src="/images/navbar/logo.svg" alt="" />
                             </NavLink>
                         </div>
 
@@ -80,14 +119,14 @@ const Navbar = () => {
                             </div>)
                             : (
                                 <div className="outline outline-2 outline-slate-200  rounded-full ml-20 max-lg:hidden">
-                                    <div className="w-96 h-12 flex gap-3 px-2 justify-between items-center">
-                                        <div className=""><button>Anywhere</button></div>
-                                        <div className="border-r-2 h-[80%] w-1 my-auto"></div>
-                                        <div className=""><button>Any Week</button></div>
-                                        <div className="border-r-2 h-[80%] w-1 my-auto"></div>
+                                    <div className="w-full h-12 flex gap-2 pl-3 px-2 justify-between items-center">
+                                        <div className="border-r-2 pr-5"><button>Anywhere</button></div>
+                                        {/* <div className="border-r-2 h-[80%] w-1 my-auto"></div> */}
+                                        <div className="border-r-2 pr-5"><button>Any Week</button></div>
+                                        {/* <div className="border-r-2 h-[80%] w-1 my-auto"></div> */}
                                         <div className="flex justify-center items-center gap-3"><button>Add Guests</button>
                                             <div className='bg-red-500 flex justify-center items-center rounded-full '>
-                                                <img className='p-2 h-10 rounded-full' src="images/navbar/smallsearch.svg" alt="" />
+                                                <img className='p-2 h-10 w-10rounded-full' src="/images/navbar/search.svg" alt="" />
                                             </div></div>
                                     </div>
                                 </div>
@@ -99,11 +138,11 @@ const Navbar = () => {
                         <div className='flex gap-4 justify-center align-middle h-full'>
                             <div className='flex gap-2 justify-center '>
                                 <h3 className='m-auto hover:bg-slate-100 rounded-3xl px-3 py-2'>Airbnb your home </h3>
-                                <button className='hover:bg-slate-100 rounded-full px-2'><img className='h-4 m-auto' src="images/navbar/earth.svg" alt="" /></button>
+                                <button className='hover:bg-slate-100 rounded-full px-2'><img className='h-4 m-auto' src="/images/navbar/earth.svg" alt="" /></button>
                             </div>
                             <button onClick={() => { setIsOpen(isOpen ? false : true), setSignShow(false), setSignupShow(false) }} className=' flex gap-2 rounded-full px-4 py-2 h-12 outline outline-slate-300 outline-1 hover:shadow-[0_3px_10px_rgb(0,0,0,0.2)]'>
-                                <img className='h-4 m-auto' src="images/navbar/threelines.svg" alt="" />
-                                <img className='h-8 rounded-full bg-slate-400 p-1' src="images/navbar/profile.svg" alt="" />
+                                <img className='h-4 m-auto' src="/images/navbar/threelines.svg" alt="" />
+                                <img className='h-8 rounded-full bg-slate-400 p-1' src="/images/navbar/profile.svg" alt="" />
                             </button>
                             {/* Dropdown menu */}
                             <div className="">
@@ -111,29 +150,41 @@ const Navbar = () => {
                                     <div className="absolute right-10 z-10 mt-16 w-48 origin-top-right bg-white border border-gray-300 rounded-md shadow-lg">
                                         <div className="py-1">
                                             {!VerifyUser ? <> <button
-                                                onClick={() => setSignupShow(true)}
-                                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                                onClick={() => { setSignupShow(true), setIsOpen(false) }}
+                                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-start"
                                             >
                                                 Sign up
                                             </button>
-                                            <button
-                                                onClick={() => setSignShow(true)}
-                                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                            >
-                                                Sign in
-                                            </button> </> : null}
-                                            {VerifyUser?<button
-                                                onClick={() => dispatch(setNotAllow())}
-                                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                                <button
+                                                    onClick={() => handleClick()}
+                                                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-start"
+                                                >
+                                                    Sign in
+                                                </button> </> : null}
+                                            {VerifyUser ? <button
+                                                onClick={() => handleLogout()}
+                                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-start"
                                             >
                                                 Log-out
-                                            </button> : null }
-                                            <NavLink
-                                                to="/host-home"
+                                            </button> : null}
+                                            {/* <NavLink
+                                                to={VerifyUser ? `/host-home/${id}`:''}
+                                                onClick={(e) => {
+                                                    if (!VerifyUser) {
+                                                      e.preventDefault(); // Prevent navigation
+                                                      handleClick();      // Trigger the custom function
+                                                    }
+                                                  }}
                                                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                             >
                                                 Airbnb your home
-                                            </NavLink>
+                                            </NavLink> */}
+                                            <button
+                                                onClick={() => handleClick()}
+                                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                            >
+                                                Airbnb your home
+                                            </button>
                                             <NavLink
                                                 to="/host-an-experience"
                                                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
@@ -157,7 +208,7 @@ const Navbar = () => {
 
                     {/* second Down */}
                     <div className={navcon ? 'visible' : 'hidden '}>
-                        <div className="w-[67vw] mx-auto max-lg:hidden  ">
+                        <div className="w-[750px] mx-auto max-lg:hidden ">
                             <div className="max-lg:invisible  top-20 -left-[25vw] outline outline-1 outline-slate-200 rounded-full shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] font-medium w-fit">
                                 <div className='  w-fit flex items-center h-[70px]'>
 
@@ -190,8 +241,8 @@ const Navbar = () => {
                                             <div>Who</div>
                                             <input className='outline-none font-normal h-4 w-32 bg-transparent' placeholder='Add guests' type="text" />
                                         </div>
-                                        <div className=' bg-red-600 rounded-full flex justify-center'>
-                                            <img className='scale-50' src="images/navbar/search.svg" alt="" />
+                                        <div className=' bg-red-600 rounded-full flex min-w-fit justify-center'>
+                                            <img className='scale-50' src="/images/navbar/search.svg" alt="" />
                                         </div>
                                     </div>
                                 </div>
@@ -201,16 +252,16 @@ const Navbar = () => {
                 </nav>
                 <NavDownBox />
             </header>
-         {!VerifyUser ? <>
-          {signShow ? (
-                <div className="absolute h-[100%] w-[100%] top-0">
-                    <SignIn />
-                </div>) : null}
-            {signupShow ? (
-                <div className="absolute h-[100%] w-[100%] top-0 ">
-                    <SignUp />
-                </div>) : null}
-          </> : null }
+            {!VerifyUser ? <>
+                {signShow ? (
+                    <div className="absolute h-[100%] w-[100%] top-0">
+                        <SignIn />
+                    </div>) : null}
+                {signupShow ? (
+                    <div className="absolute h-[100%] w-[100%] top-0 ">
+                        <SignUp />
+                    </div>) : null}
+            </> : null}
         </>
     )
 }

@@ -1,13 +1,14 @@
 const express = require('express')
 const upload = require('../middlewares/multerMiddleware')
 const { createPost, getAllPost, postById } = require('../controllers/postController')
+const checkJWT = require('../middlewares/checkJWT')
 
 const postRouter = express.Router()
 
-postRouter.route('/create/').post(upload.array('post-image'),createPost)
+postRouter.route('/create/:id').post(upload.array('post-image',12),createPost)
 
 postRouter.route('/allpost').get(getAllPost)
 
-postRouter.route('/allpost/:id').get(postById)
+postRouter.route('/:id').get(postById)
 
 module.exports = postRouter

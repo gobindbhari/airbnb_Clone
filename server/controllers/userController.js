@@ -53,13 +53,13 @@ const signin = async (req, res) => {
             "email": email,
             "_id": _id
         }
-        const token = await jwt.sign(payload, sceret_key, { expiresIn: '1h' })
+        const token = await jwt.sign(payload, sceret_key)
         return res.status(200).cookie('authToken',token,{
             httpOnly:true,
             secure:false,   // true in production
             sameSite:'Strict',
             maxAge: 7 * 24 * 60 * 60 * 1000
-        }).json({ message: 'Successfully Sign-in'})
+        }).json({ message: 'Successfully Sign-in', user:_id})
 
     } catch (error) {
         console.log('error in signin controller please check', error)
@@ -92,5 +92,30 @@ const updateUser = async (req, res) => {
     }
 }
 
+const getuser = async (req,res) => {
+    try {
+        const {id} = req.params
+        if (!id ) {
+            return res.status(400).json({ 
+                message: "Id is not given , please provide" 
+            });
+        }
+        const data = await User.findById(id)
+        if (!data) {
+            return res.status(404).json({ 
+                message: "User not found" 
+            });
+        }
+        // return res.status(200).send(true);
+        return res.status(200).send(data);
+    } catch (error) {
+        console.error("Error in getuser :", error);
+        return res.status(500).json({ 
+            message: "Error in getuser", 
+            error: error.message 
+        });
+    }
+}
 
-module.exports = { signup, signin, updateUser }
+
+module.exports = { signup, signin, updateUser, getuser }

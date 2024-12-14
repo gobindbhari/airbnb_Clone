@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { useForm } from "react-hook-form"
 import { NavLink } from 'react-router-dom'
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
+
+import { toast } from 'react-toastify';
 
 import { useSelector, useDispatch } from 'react-redux'
 import { setNotAllow, setAllow } from '../../redux/content/verify'
@@ -19,31 +19,38 @@ const SignIn = () => {
 
     const {register,handleSubmit,watch,formState: { errors },} = useForm()
 
-    const notify = (e) => toast(e);
+    // const notify = (e) => toast(e);
 
 
     const onSubmit = async (data) => {
            try {
-            debugger
+            // debugger
             console.log(data)
             const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/user/signin`,data, { withCredentials: true })
             console.log(response)
+            const token = response.data.user
             if(response.status === 200 || response.status === 201 ){
-                notify('successfully signin')
+                toast.success('successfully signin')
                 console.log(response.data)
                 dispatch(setAllow())
-            }else{
-                notify(response.data.message)
+                setShow(false)
+                localStorage.setItem('token',token)
+            } 
+            if(response.status === 400 || response.status === 404 ) {
+                // toast(response.data.message)
+                console.log(response.data.message)
             }
+
            } catch (error) {
             console.log('error',error)
+            console.log(error.response.data.message,'-=----------------============')
+            toast.error(error.response.data.message)
            }
     }
 
     return (
-        <>
-            {show ?
-                (<div className="absolute w-[100%] h-[100%]  py-4 md:py-8 bg-[#00000015] z-50 ">
+        <div className={show ? 'block' : 'hidden'}>
+                <div className="absolute w-[100%] h-[100%]  py-4 md:py-8 bg-[#00000015] z-50 ">
 
                     <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0 mt-20">
 
@@ -89,10 +96,8 @@ const SignIn = () => {
                             </div>
                         </div>
                     </div>
-
-                </div>) : ''}
-                <ToastContainer/>
-        </>
+                </div>
+        </div>
     )
 }
 
