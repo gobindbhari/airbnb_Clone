@@ -9,7 +9,8 @@ const app = express()
 const port = process.env.PORT || 3000
 app.use(express.json())
 app.use(cors({
-  origin: 'http://localhost:5173', // Frontend URL
+  // origin: 'http://localhost:5173', // Frontend URL
+  origin: 'https://airbnb-clone-one-tan.vercel.app', // Frontend URL
     credentials: true, // Allow cookies to be sent
 }))
 
