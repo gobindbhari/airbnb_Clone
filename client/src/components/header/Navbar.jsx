@@ -99,7 +99,7 @@ const Navbar = () => {
                         {/* first */}
                         <div>
                             <NavLink to={'/'}>
-                                <img className='h-10 w-28 ' src="/images/navbar/logo.svg" alt="" />
+                                <img className='h-16 rounded-full  ' src="/images/navbar/logo.webp" alt="" />
                             </NavLink>
                         </div>
 
