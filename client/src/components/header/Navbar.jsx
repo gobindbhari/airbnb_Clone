@@ -27,25 +27,25 @@ const Navbar = () => {
 
 
     const getdata = async (e) => {
-    const User = await axios(`${import.meta.env.VITE_BACKEND_URL}/user/${e}`,{
-        withCredentials:true
-    })
-    console.log(User)
+        const User = await axios(`${import.meta.env.VITE_BACKEND_URL}/user/${e}`, {
+            withCredentials: true
+        })
+        console.log(User)
         User ? dispatch(setAllow()) : dispatch(setNotAllow())
     }
     useEffect(() => {
         let token = localStorage.getItem('token') || null
-        // console.log(token)
-        setId(token)
+        console.log(token, 'ooooooooooooooooooo')
         getdata(token)
-    },[dispatch])
-    
+        setId(token)
+    }, [dispatch])
+
     useEffect(() => {
         let token = localStorage.getItem('token') || null
-        // console.log(token)
-        setId(token)
+        console.log(token, 'llllllllllllllllllllll')
         getdata(token)
-    },[])
+        setId(token)
+    })
 
     useEffect(() => {
         const handleScroll = () => {
@@ -79,20 +79,31 @@ const Navbar = () => {
         visibility: thrid ? 'hidden' : 'visible'
     }
 
-    function handleLogout (){
+    function handleLogout() {
         localStorage.removeItem('token')
         setIsOpen(false)
-        dispatch(setNotAllow()) 
-        setjust(just+1)
+        dispatch(setNotAllow())
+        setjust(just + 1)
+        navigate('/')
     }
 
-    const handleClick = ()=>{
-        VerifyUser ? navigate(`/host-home/${id}`):(setSignShow(true),
-        setIsOpen(false))
+    const handleClick = () => {
+        VerifyUser ? navigate(`/host-home/${id}`) : (setSignShow(true),
+            setIsOpen(false))
     }
+
+    const handleMenu = () => {
+        setIsOpen(isOpen ? false : true)
+        setSignShow(false)
+        setSignupShow(false)
+        setTimeout(() => {
+            setIsOpen(false)
+        }, 3000);
+    }
+
     return (
         <>
-            <header className='top-0 w-screen fixed bg-white z-10' >
+            <header className='top-0 w-screen fixed bg-white z-10 max-h-80 min-h-44' >
                 <nav className='mx-9 my-2 font-semibold  max-md:mr-2 max-md:ml-3 '>
                     <div className='flex justify-between'>
 
@@ -140,7 +151,7 @@ const Navbar = () => {
                                 <h3 className='m-auto hover:bg-slate-100 rounded-3xl px-3 py-2'>Airbnb your home </h3>
                                 <button className='hover:bg-slate-100 rounded-full px-2'><img className='h-4 m-auto' src="/images/navbar/earth.svg" alt="" /></button>
                             </div>
-                            <button onClick={() => { setIsOpen(isOpen ? false : true), setSignShow(false), setSignupShow(false) }} className=' flex gap-2 rounded-full px-4 py-2 h-12 outline outline-slate-300 outline-1 hover:shadow-[0_3px_10px_rgb(0,0,0,0.2)]'>
+                            <button onClick={() => handleMenu()} className=' flex gap-2 rounded-full px-4 py-2 h-12 outline outline-slate-300 outline-1 hover:shadow-[0_3px_10px_rgb(0,0,0,0.2)]'>
                                 <img className='h-4 m-auto' src="/images/navbar/threelines.svg" alt="" />
                                 <img className='h-8 rounded-full bg-slate-400 p-1' src="/images/navbar/profile.svg" alt="" />
                             </button>
@@ -150,7 +161,7 @@ const Navbar = () => {
                                     <div className="absolute right-10 z-10 mt-16 w-48 origin-top-right bg-white border border-gray-300 rounded-md shadow-lg">
                                         <div className="py-1">
                                             {!VerifyUser ? <> <button
-                                                onClick={() => { setSignupShow(true), setIsOpen(false) }}
+                                                onClick={() => { setSignupShow(true), setIsOpen(false), setIsOpen(false) }}
                                                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-start"
                                             >
                                                 Sign up

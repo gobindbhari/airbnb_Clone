@@ -15,7 +15,7 @@ const Home = () => {
   }, [])
   return (
    <>
-    <div className=' mt-[49vh] flex flex-wrap justify-evenly gap-1 '>
+    <div className='mt-[20vw] [425px]:mt-[50vw] max-[425px]:mt-[45vw] max-[375px]:mt-[50vw] flex flex-wrap justify-evenly gap-1 '>
       {fetechData.map((e)=>{
         return <Card
            key={e.index}

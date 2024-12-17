@@ -15,7 +15,7 @@ const Card = ({ title, description, pricePerNight, images }) => {
           className="w-full h-80 object-cover rounded-xl hover:scale-110 duration-300 "
         />
         <div className="absolute bottom-0 left-0 w-full p-4 ">
-          <div className="bg-transparent"><p className="text-white text-lg font-bold">{title}</p></div>
+          <div className="bg-transparent"><p className="text-white text-lg font-bold line-clamp-2">{title}</p></div>
         </div>
       </div>
       <div className="p-4">
