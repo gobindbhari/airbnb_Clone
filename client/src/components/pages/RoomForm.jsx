@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
 
 
-const PostForm = () => {
+const RoomForm = () => {
     const categories = [
         "Icons", "Cabins", "Country Sides", "National Parks", "Farms", "Amazing Pools",
         "Amazing Views", "Rooms", "Tree Houses", "Luxe", "Beach", "Historical Homes", "Mansions",
@@ -242,4 +242,4 @@ const PostForm = () => {
     );
 };
 
-export default PostForm;
+export default RoomForm ;

@@ -85,9 +85,13 @@ const NavDownBox = () => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   });
+
+  const handleData = async (e)=> {
+    
+  }
   
     return (
-        <div className='border-t-2  pt-2 relative'>
+        <div className='border-t-[1px]  border-b-[1px] py-2 relative'>
 
             <Swiper
         slidesPerView={slidesPerView}
@@ -104,7 +108,7 @@ const NavDownBox = () => {
       >
         {slides.map((slide, index) => (
         <SwiperSlide key={index}>
-          <div className="group cursor-pointer -mt-3">
+          <div onClick={()=>handleData(slide.label)} className="group cursor-pointer -mt-3">
           <img className='group p-6 max-lg:p-3 min-[768px]:scale-110  max-sm:p-1 max-md:p-2 max-xl:p-4 font-normal max-lg:text-base  ml-[2px]' src={slide.src} alt={slide.label} />
           <div className="text-xs font-semibold max-sm:text-[10px]  group-hover:border-t-2 hover:border-t-2 duration-100" >{slide.label}</div>
           </div>

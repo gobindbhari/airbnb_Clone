@@ -16,9 +16,9 @@ import {
 import Home from './components/pages/Home.jsx';
 import SignIn from './components/authrization/SignIn.jsx';
 import NotFound from './components/pages/NotFound.jsx';
-import PostForm from './components/pages/PostForm.jsx';
 import SignUp from './components/authrization/SignUp.jsx';
-import Post from './components/pages/Post.jsx'
+import Rooms from './components/pages/Rooms.jsx'
+import RoomForm from './components/pages/RoomForm.jsx'
 
 
 
@@ -38,15 +38,15 @@ const router = createBrowserRouter([
       },
       {
         path: '/host-home/:id',
-        element: <PostForm />
+        element: <RoomForm />
       },
       {
         path: '/signup',
         element: <SignUp />
       },
       {
-        path: '/post',
-        element: <Post />
+        path: '/room/:id',
+        element: <Rooms />
       },
     ]
   },

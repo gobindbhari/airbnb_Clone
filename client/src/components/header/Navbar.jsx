@@ -93,7 +93,7 @@ const Navbar = () => {
     return (
         <>
             <header className='top-0 w-screen fixed bg-white z-10' >
-                <nav className='mx-9 my-5 font-semibold  max-md:mr-2 max-md:ml-3 '>
+                <nav className='mx-9 my-2 font-semibold  max-md:mr-2 max-md:ml-3 '>
                     <div className='flex justify-between'>
 
                         {/* first */}

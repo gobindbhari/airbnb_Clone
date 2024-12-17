@@ -1,6 +1,18 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect } from 'react'
+import { Meta, useParams } from 'react-router-dom'
 
-const Post = () => {
+
+const Rooms = () => {
+
+  const {id} = useParams
+
+  const getData = async () => {
+   const data = await axios(`${import.meta.env.VITE_BACKEND_URL}/post/${id}`)
+  }
+  useEffect(() => {
+  }, [])
+  
   return (
     <>
        <div className="max-w-6xl mx-auto px-4 py-6">
@@ -139,4 +151,4 @@ const Post = () => {
   )
 }
 
-export default Post
+export default Rooms
