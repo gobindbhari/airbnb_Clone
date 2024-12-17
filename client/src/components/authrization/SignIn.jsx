@@ -56,7 +56,7 @@ const SignIn = () => {
 
                         <div
                             className="w-full bg-white rounded-lg shadow-[rgba(0,_0,_0,_0.4)_0px_30px_90px] dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700 ">
-                            <button onClick={() => setShow(false)} className="mt-1 ml-1 {}"><img src="public\images\signin\cancel.svg" alt="" /></button>
+                            <button onClick={() => setShow(false)} className="mt-1 ml-1 {}"><img src="/images/signin/cancel.svg" alt="" /></button>
                             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                                 <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                                     Sign in to your account
@@ -83,7 +83,7 @@ const SignIn = () => {
                                         <button type='button' className='px-3' onClick={(event) => {
                                         event.preventDefault(); // Stops form submission
                                         setTypePW(!typePW);
-                                    }}>{typePW ? (<img src="public\images\signin\closeeye.svg" alt="" />) : (<img src="public\images\signin\openeye.svg" alt="" />)}</button>
+                                    }}>{typePW ? (<img src="/images/signin/closeeye.svg" alt="" />) : (<img src="/images/signin/openeye.svg" alt="" />)}</button>
                                         </div>
                                     </div>
                                   
