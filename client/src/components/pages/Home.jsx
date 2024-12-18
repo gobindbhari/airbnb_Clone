@@ -8,7 +8,7 @@ const Home = () => {
   useEffect(() => {
     const getdata = async () => {
       const data = await axios('http://localhost:5500/post/allpost')
-      console.log('data is recevied',data)
+      // console.log('data is recevied',data)
       setFetechData(data.data)
     }
     getdata()

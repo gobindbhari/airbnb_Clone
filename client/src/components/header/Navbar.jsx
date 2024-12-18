@@ -94,7 +94,7 @@ const Navbar = () => {
         <>
             <header className='top-0 w-screen fixed bg-white z-10' >
                 <nav className='mx-9 my-2 font-semibold  max-md:mr-2 max-md:ml-3 '>
-                    <div className='flex justify-between'>
+                    <div className='flex justify-between '>
 
                         {/* first */}
                         <div>
@@ -118,15 +118,15 @@ const Navbar = () => {
 
                             </div>)
                             : (
-                                <div className="outline outline-2 outline-slate-200  rounded-full ml-20 max-lg:hidden">
-                                    <div className="w-full h-12 flex gap-2 pl-3 px-2 justify-between items-center">
+                                <div className="outline outline-2 outline-slate-200 flex items-center rounded-full ml-20 max-lg:hidden">
+                                    <div className="w-full flex gap-2 px-2 justify-between items-center">
                                         <div className="border-r-2 pr-5"><button>Anywhere</button></div>
                                         {/* <div className="border-r-2 h-[80%] w-1 my-auto"></div> */}
                                         <div className="border-r-2 pr-5"><button>Any Week</button></div>
                                         {/* <div className="border-r-2 h-[80%] w-1 my-auto"></div> */}
                                         <div className="flex justify-center items-center gap-3"><button>Add Guests</button>
                                             <div className='bg-red-500 flex justify-center items-center rounded-full '>
-                                                <img className='p-2 h-10 w-10rounded-full' src="/images/navbar/search.svg" alt="" />
+                                                <img className='p-2 h-10 w-10 rounded-full' src="/images/navbar/search.svg" alt="" />
                                             </div></div>
                                     </div>
                                 </div>

@@ -26,12 +26,12 @@ const RoomForm = () => {
         debugger
         try {
             const newData = { ...data, hostedby:id}
-        console.log("Form Data:", newData);
+        // console.log("Form Data:", newData);
         const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/post/create/${id}`,newData)
         if (response.status === 200 || response.status === 201 ) {
             toast("Post is successfully created")
         } else {
-            console.log(response)
+            console.log(response.data.message)
         } 
     } catch (error) {
         console.log(error)
