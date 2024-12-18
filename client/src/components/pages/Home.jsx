@@ -8,14 +8,14 @@ const Home = () => {
   useEffect(() => {
     const getdata = async () => {
       const data = await axios('http://localhost:5500/post/allpost')
-      // console.log('data is recevied',data)
+      console.log('data is recevied',data)
       setFetechData(data.data)
     }
     getdata()
   }, [])
   return (
    <>
-    <div className=' mt-[49vh] flex flex-wrap justify-evenly gap-1 '>
+    <div className='mt-[20vw] [425px]:mt-[50vw] max-[425px]:mt-[45vw] max-[375px]:mt-[50vw] flex flex-wrap justify-evenly gap-1 '>
       {fetechData.map((e)=>{
         return <Card
            key={e.index}
