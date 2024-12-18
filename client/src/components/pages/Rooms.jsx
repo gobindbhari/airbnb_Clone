@@ -1,19 +1,16 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Meta, useParams } from 'react-router-dom'
 
 
 const Rooms = () => {
-  const [roomData, setRoomData] = useState([])
 
   const {id} = useParams
 
-  useEffect(() => {
   const getData = async () => {
    const data = await axios(`${import.meta.env.VITE_BACKEND_URL}/post/${id}`)
-    setRoomData(data)
   }
-  getData()
+  useEffect(() => {
   }, [])
   
   return (

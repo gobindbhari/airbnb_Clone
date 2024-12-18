@@ -25,13 +25,13 @@ const SignIn = () => {
     const onSubmit = async (data) => {
            try {
             // debugger
-            // console.log(data)
+            console.log(data)
             const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/user/signin`,data, { withCredentials: true })
-            // console.log(response)
+            console.log(response)
             const token = response.data.user
             if(response.status === 200 || response.status === 201 ){
                 toast.success('successfully signin')
-                // console.log(response.data)
+                console.log(response.data)
                 dispatch(setAllow())
                 setShow(false)
                 localStorage.setItem('token',token)
@@ -42,8 +42,8 @@ const SignIn = () => {
             }
 
            } catch (error) {
-            // console.log('error',error)
-            // console.log(error.response.data.message,'-=----------------============')
+            console.log('error',error)
+            console.log(error.response.data.message,'-=----------------============')
             toast.error(error.response.data.message)
            }
     }

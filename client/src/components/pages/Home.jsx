@@ -7,7 +7,7 @@ const Home = () => {
 
   useEffect(() => {
     const getdata = async () => {
-      const data = await axios('http://localhost:5500/post/allpost')
+      const data = await axios(`${import.meta.env.VITE_BACKEND_URL}/post/allpost`)
       console.log('data is recevied',data)
       setFetechData(data.data)
     }
