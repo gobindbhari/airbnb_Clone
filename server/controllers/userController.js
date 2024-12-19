@@ -50,16 +50,20 @@ const signin = async (req, res) => {
         const checkPW = await bcrypt.compare(password, existUser.password);
         if (!checkPW) return res.status(400).json({ message: 'Password is invalid Please try again' })
         const payload = {
-            "email": email,
-            "_id": _id
+            email,
+            _id
         }
         const token = await jwt.sign(payload, sceret_key)
-        return res.status(200).cookie('authToken',token,{
-            httpOnly:true,
-            secure:false,   // true in production
-            sameSite:'Strict',
-            maxAge: 7 * 24 * 60 * 60 * 1000
-        }).json({ message: 'Successfully Sign-in', user:_id})
+        console.log("tokneeee",token)
+        return res.status(200)
+        .json({ message: 'Successfully Sign-in', user:_id, token})
+
+        // return res.status(200).cookie('authToken',token,{
+        //     httpOnly:true,
+        //     secure:false,   // true in production
+        //     sameSite:'Strict',
+        //     maxAge: 7 * 24 * 60 * 60 * 1000
+        // }).json({ message: 'Successfully Sign-in', user:_id})   
 
     } catch (error) {
         console.log('error in signin controller please check', error)
@@ -100,7 +104,7 @@ const getuser = async (req,res) => {
                 message: "Id is not given , please provide" 
             });
         }
-        const data = await User.findById(id)
+        const data = await User.findById(id).select('-password -updatedAt -createdAt')
         if (!data) {
             return res.status(404).json({ 
                 message: "User not found" 

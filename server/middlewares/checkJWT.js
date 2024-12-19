@@ -4,7 +4,12 @@ require('dotenv').config()
 
 const checkJWT = (req,res,next) => {
  try {
-    const token = req.cookies('authToken')
+   //  const token = req.cookies('authToken')
+   //  const token = req.headers['authorization']?.split(' ')[1]
+   //  const token = req.headers['authorization'].split('Bearer ')[1]
+    const token = req.headers['authorization']
+    console.log( req.headers)
+    console.log('jwtwwwwwwwwwwwwwwwwwwwwwwwwwwwww',token)
 
     if (!token) {
         return res.status(401).json({ message: 'Access Denied. No token provided.' });

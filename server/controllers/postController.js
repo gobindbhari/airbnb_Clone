@@ -54,7 +54,9 @@ const createPost = async (req,res) => {
 
 const getAllPost = async (req,res) => {
     try {
+        console.log("tetssss")
         const data = await Post.find()
+        console.log(data,"rvaan")
         return res.send(data)
     } catch (error) {
         

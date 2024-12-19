@@ -34,17 +34,17 @@ const Navbar = () => {
         User ? dispatch(setAllow()) : dispatch(setNotAllow())
     }
     useEffect(() => {
-        let token = localStorage.getItem('token') || null
-        console.log(token, 'ooooooooooooooooooo')
-        getdata(token)
-        setId(token)
+        let user = localStorage.getItem('user') || null
+        console.log(user, 'ooooooooooooooooooo')
+        getdata(user)
+        setId(user)
     }, [dispatch])
 
     useEffect(() => {
-        let token = localStorage.getItem('token') || null
-        console.log(token, 'llllllllllllllllllllll')
-        getdata(token)
-        setId(token)
+        let user = localStorage.getItem('user') || null
+        console.log(user, 'llllllllllllllllllllll')
+        getdata(user)
+        setId(user)
     })
 
     useEffect(() => {
@@ -80,7 +80,7 @@ const Navbar = () => {
     }
 
     function handleLogout() {
-        localStorage.removeItem('token')
+        localStorage.removeItem('user')
         setIsOpen(false)
         dispatch(setNotAllow())
         setjust(just + 1)

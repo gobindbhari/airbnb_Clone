@@ -26,18 +26,24 @@ const SignIn = () => {
            try {
             // debugger
             console.log(data)
-            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/user/signin`,data, { withCredentials: true })
-            console.log(response)
-            const token = response.data.user
+            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/user/signin`,data,{
+
+            })
+            console.log(response,"responseeeee")
+            const token = response.data.token
+            const user = response.data.user
             if(response.status === 200 || response.status === 201 ){
                 toast.success('successfully signin')
                 console.log(response.data)
                 dispatch(setAllow())
                 setShow(false)
-                localStorage.setItem('token',token)
+                console.log('kkkkkkkkkkkkkkk',token)
+                // axios.defaults.headers.common['Authorization'] = `Bearer  ${token}`
+                localStorage.setItem('user', user )
+                localStorage.setItem('token', token  )
             } 
             if(response.status === 400 || response.status === 404 ) {
-                // toast(response.data.message)
+                toast(response.data.message)
                 console.log(response.data.message)
             }
 
