@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState} from 'react'
 import { Meta, useParams } from 'react-router-dom'
 
 
@@ -7,57 +7,34 @@ const Rooms = () => {
 
   const {id} = useParams
 
+  const [images, setImages] = useState([])
+
   const getData = async () => {
    const data = await axios(`${import.meta.env.VITE_BACKEND_URL}/post/${id}`)
   }
   useEffect(() => {
+    getData()
   }, [])
   
   return (
     <>
-       <div className="max-w-6xl mx-auto px-4 py-6">
+       <div className="max-w-6xl mx-auto px-4 py-6 mt-[2vw]">
       {/* Title */}
       <h1 className="text-3xl font-bold mb-4">
         Family Room: Nirvana Homes | Wooden house | Farm stay
       </h1>
 
       {/* Images Section */}
-      <div className="grid grid-cols-2 gap-4">
-        {/* Large Image */}
-        <div className="row-span-2">
-          <img
-            src="/images/main.jpg" // Replace with actual path
-            alt="Main View"
-            className="w-full h-full object-cover rounded-lg"
-          />
+      <div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+      {images.map((e)=>{
+        return <div class="swiper-slide">
+          <img src="" alt="" />
         </div>
-        {/* Smaller Images */}
-        <img
-          src="/images/room1.jpg"
-          alt="Room 1"
-          className="w-full h-40 object-cover rounded-lg"
-        />
-        <img
-          src="/images/room2.jpg"
-          alt="Room 2"
-          className="w-full h-40 object-cover rounded-lg"
-        />
-        <img
-          src="/images/room3.jpg"
-          alt="Room 3"
-          className="w-full h-40 object-cover rounded-lg"
-        />
-        <div className="relative">
-          <img
-            src="/images/room4.jpg"
-            alt="Room 4"
-            className="w-full h-40 object-cover rounded-lg"
-          />
-          <button className="absolute inset-0 bg-black bg-opacity-50 text-white font-semibold flex items-center justify-center rounded-lg">
-            Show all photos
-          </button>
-        </div>
-      </div>
+      })}
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
 
       {/* Description Section */}
       <div className="mt-6">
