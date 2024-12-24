@@ -7,7 +7,7 @@ const postRouter = express.Router()
 
 postRouter.route('/create/:id').post(upload.array('post-image',12),createPost)
 
-postRouter.route('/allpost').get(checkJWT, getAllPost)
+postRouter.route('/allpost').get(getAllPost)
 
 postRouter.route('/:id').get(postById)
 

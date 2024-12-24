@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
-import { NavLink     } from 'react-router-dom'
+import { NavLink  } from 'react-router-dom'
 import { useForm } from "react-hook-form"
 import axios from 'axios'
 
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 
 
 const SignUp = () => {
@@ -12,8 +11,6 @@ const SignUp = () => {
 
     const [first, setfirst] = useState(true)
     const [typePW, setTypePW] = useState(true)
-
-    const notify = (e) => toast(e);
 
     const blockdisplay = () => {
         setfirst(false)
@@ -24,13 +21,13 @@ const SignUp = () => {
         // debugger
         try {
             console.log(data)
-        const response = await axios.post('http://localhost:5500/user/register',data)
+        const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/user/register`,data)
         console.log(response.data.message)
         if(response.status === 201 || response.status === 200 ){
-            notify("Account is successfully created")
+            toast.success("Account is successfully created")
             setfirst(false)
         }else{
-            notify(response.data.message)
+            toast(response.data.message)
         }
     } catch (error) {
             console.log('Account is not submitted' , error)
@@ -84,7 +81,6 @@ const SignUp = () => {
                 </div>
             </div>
         </section>
-        <ToastContainer/>
     </div>
     )
 }

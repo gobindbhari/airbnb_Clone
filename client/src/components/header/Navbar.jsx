@@ -81,6 +81,7 @@ const Navbar = () => {
 
     function handleLogout() {
         localStorage.removeItem('user')
+        localStorage.removeItem('token')
         setIsOpen(false)
         dispatch(setNotAllow())
         setjust(just + 1)

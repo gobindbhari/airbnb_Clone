@@ -19,9 +19,6 @@ const SignIn = () => {
 
     const {register,handleSubmit,watch,formState: { errors },} = useForm()
 
-    // const notify = (e) => toast(e);
-
-
     const onSubmit = async (data) => {
            try {
             // debugger
@@ -33,7 +30,8 @@ const SignIn = () => {
             const token = response.data.token
             const user = response.data.user
             if(response.status === 200 || response.status === 201 ){
-                toast.success('successfully signin')
+                // toast.success('successfully signin')
+                toast.success("Successfully signed in")
                 console.log(response.data)
                 dispatch(setAllow())
                 setShow(false)
