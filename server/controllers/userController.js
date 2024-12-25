@@ -1,4 +1,4 @@
-const { default: mongoose } = require("mongoose");
+const { mongoose } = require("mongoose");
 const jwt = require('jsonwebtoken');
 const User = require("../models/userModel");
 const bcrypt = require("bcryptjs")

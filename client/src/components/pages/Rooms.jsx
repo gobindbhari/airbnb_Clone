@@ -13,6 +13,8 @@ const Rooms = () => {
   const [address,setAddress] = useState({})
   const [propertyDetails,setPropertyDetails] = useState({})
   const [availableDates,setAvailableDates] = useState({})
+  const [hostedBy,setHostedBy] = useState({})
+  const [numGuest,setNumGuest] = useState()
   // console.log("ravaaaaaaa",fetchData.address.street)
 
   const getData = async () => {
@@ -24,6 +26,8 @@ const Rooms = () => {
     setAddress(data.data.address)
     setPropertyDetails(data.data.propertyDetails)
     setAvailableDates(data.data.availableDates)
+    setHostedBy(data.data.hostedBy)
+    setNumGuest(data.data.propertyDetails.guests)
     console.log("ravaaaa",data.data)
    
   }
@@ -63,11 +67,12 @@ const Rooms = () => {
             {`${address.street}, ${address.town},${address.district}, ${address.state},${address.pincode}, ${address.country}`}
           </p>
           <p className="text-sm text-gray-600">
-            {`Bedroom ${propertyDetails.bedrooms},  Bedroom ${propertyDetails.bedrooms},Bedroom ${propertyDetails.bedrooms},Bedroom ${propertyDetails.bedrooms},`}
+            {`Bedroom ${propertyDetails.bedrooms},  Bathrooms ${propertyDetails.bathrooms}, Beds ${propertyDetails.beds}, Guests ${propertyDetails.guests}, Kitchen ${propertyDetails.kitchen},`}
           </p>
-          <a href="#" className="text-blue-600 underline mt-2 block">
-            ★ 1 review
-          </a>
+          <div className="mt-2 block">
+            {/* ★ 1 review */}
+            <h4>Hosted By {hostedBy.email}</h4>
+          </div>
         </div>
 
         {/* Host Highlights */}
@@ -95,7 +100,7 @@ const Rooms = () => {
             <p className="text-gray-700 font-medium">
               Exceptional Host communication
               <span className="block text-sm text-gray-500">
-                Guests gave Tarana a 5-star rating for communication.
+                Guests gave Tarana div 5-star rating for communication.
               </span>
             </p>
           </div>
@@ -122,27 +127,22 @@ const Rooms = () => {
           </div>
           <div className="mt-4">
             <label className="block text-gray-600 mb-1">Guests</label>
-            <select className="w-full border rounded px-2 py-1">
+            <input type="number" className='border-stone-200 outline-none border-[1px] rounded-sm px-2 py-1 ' />
+            {/* <select className="w-full border rounded px-2 py-1">
               <option>1 guest</option>
               <option>2 guests</option>
               <option>3 guests</option>
               <option>4 guests</option>
-            </select>
+            </select> */}
           </div>
         </div>
 
         {/* About Section */}
         <div className="mt-6">
           <p className="text-gray-700 leading-relaxed">
-            Nirvana Homes uses a 19th-Century wooden house built using “Kath Kuni”
-            Architecture, an indigenous construction technique. Providing a
-            panoramic view of the Himalayas, amidst apple orchards, we're located
-            80km from Shimla. <br />
-            With 2 king-size beds & seating space, this room is ideal for groups
-            who want to stay together in comfort and enjoy colorful décor and a
-            peaceful stay.
+           {fetchData.description}
           </p>
-          <button className="text-blue-600 mt-2 underline">Show more</button>
+          <button className="mt-2 rounded-md bg-blue-600 px-4 py-1 text-white">Book Now</button>
         </div>
       </div>
     </>
