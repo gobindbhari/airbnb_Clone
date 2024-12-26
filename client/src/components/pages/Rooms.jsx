@@ -64,7 +64,7 @@ const Rooms = () => {
         {/* Description Section */}
         <div className="mt-6">
           <p className="text-lg text-gray-700 font-semibold">
-            {`${address.street}, ${address.town},${address.district}, ${address.state},${address.pincode}, ${address.country}`}
+            {`${address.street}, ${address.town}, ${address.district}, ${address.state}, ${address.pincode}, ${address.country}`}
           </p>
           <p className="text-sm text-gray-600">
             {`Bedroom ${propertyDetails.bedrooms},  Bathrooms ${propertyDetails.bathrooms}, Beds ${propertyDetails.beds}, Guests ${propertyDetails.guests}, Kitchen ${propertyDetails.kitchen},`}

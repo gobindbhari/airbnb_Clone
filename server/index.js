@@ -16,13 +16,13 @@ app.use(express.json())
 app.use(cors({
   origin: 'http://localhost:5173', // Frontend URL
   // origin: 'https://airbnb-clone-one-tan.vercel.app', // Frontend URL
-    credentials: true, // Allow cookies to be sent
+   // credentials: true, // Allow cookies to be sent
 }))
 
-const instance = new Razorpay({
-  key_id: 'YOUR_KEY_ID',
-  key_secret: 'YOUR_KEY_SECRET',
-});
+// const instance = new Razorpay({
+//   key_id: 'YOUR_KEY_ID',
+//   key_secret: 'YOUR_KEY_SECRET',
+// });
 
 app.use('/user',userRoute)
 app.use('/post',postRouter)
@@ -36,4 +36,4 @@ app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
 
-exports = { instance }
+// exports = { instance }

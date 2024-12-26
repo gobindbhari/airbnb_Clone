@@ -56,10 +56,10 @@ const getAllPost = async (req,res) => {
     try {
         console.log("tetssss")
         const data = await Post.find()
-        console.log(data,"rvaan")
+        // console.log(data,"rvaan")
         return res.send(data)
     } catch (error) {
-        
+        return res.status(500).json({ message: 'Error in getAllPost postcontroller, please try again later',error }); 
     }    
 }
 
@@ -69,7 +69,7 @@ const postById = async (req,res) => {
         const data = await Post.findById(id).populate('hostedBy', '-password')
         return res.send(data)
     } catch (error) {
-        
+        return res.status(500).json({ message: 'Error in postById postcontroller, please try again later',error });   
     }    
 }
 
