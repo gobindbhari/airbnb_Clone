@@ -1,12 +1,14 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { toast } from 'react-toastify';
 
 
 const Rooms = () => {
 
   const { id } = useParams()
 
+  const [userData, setUserData] = useState({})
   const [load, setLoad] = useState(false)
   const [images, setImages] = useState([])
   const [fetchData, setFetchData] = useState({})
@@ -29,6 +31,11 @@ const Rooms = () => {
     setHostedBy(data.data.hostedBy)
     setNumGuest(data.data.propertyDetails.guests)
     console.log("ravaaaa",data.data)
+    console.log('=======================================', data.data.hostedBy)
+    setUserData({
+      id: data.data.hostedBy._id,
+      email: data.data.hostedBy.email
+    })
    
   }
   useEffect(() => {
@@ -36,6 +43,20 @@ const Rooms = () => {
     setLoad(true)
   },[])
   
+  const handleBook = async () => {
+    try {
+      debugger
+      console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh')
+      const price = data.data.pricePerNight 
+      const data = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/payment`,{
+        ...userData,
+      price : price
+      })
+      toast('successfully payment send data')
+    } catch (error) {
+      
+    }
+  }
   
 // if(!load){
 //   return<div>
@@ -142,7 +163,7 @@ const Rooms = () => {
           <p className="text-gray-700 leading-relaxed">
            {fetchData.description}
           </p>
-          <button className="mt-2 rounded-md bg-blue-600 px-4 py-1 text-white">Book Now</button>
+          <button onClick={()=> handleBook()} className="mt-2 rounded-md bg-blue-600 px-4 py-1 text-white">Book Now</button>
         </div>
       </div>
     </>
