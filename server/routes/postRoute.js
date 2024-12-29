@@ -5,7 +5,7 @@ const checkJWT = require('../middlewares/checkJWT')
 
 const postRouter = express.Router()
 
-postRouter.route('/create/:id').post(upload.array('post-image',12),createPost)
+postRouter.route('/create/:id').post(upload.array('images',12),createPost)
 
 postRouter.route('/allpost').get(getAllPost)
 

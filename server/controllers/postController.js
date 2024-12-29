@@ -1,16 +1,16 @@
-const { default: mongoose } = require("mongoose");
+const mongoose = require("mongoose");
 const User = require("../models/userModel");
 const Post = require("../models/postModel");
 
 
 const createPost = async (req,res) => {
     try {
-        console.log(req.body)
+        console.log('rarrrrrrrrrrrrrrrrr',req.body)
         const {id} = req.params
-        const { title, description, pricePerNight, availableDates, propertyDetails, address, category } = req.body;
-            const {bedrooms,bathrooms,guests,beds,kitchen} = propertyDetails
-            const {pincode,country,street,state,town,district} = address
-            const {startDate,endDate} = availableDates
+        const { title, description, pricePerNight, category,bedrooms,bathrooms,guests,beds,kitchen,pincode,country,street,state,town,district,startDate,endDate } = req.body;
+            // const {bedrooms,bathrooms,guests,beds,kitchen} = propertyDetails
+            // const {pincode,country,street,state,town,district} = address
+            // const {startDate,endDate} = availableDates
         if (!title || !description || !pricePerNight || !category) {
             return res.status(400).json({ message: 'All fields are required' });
         }
@@ -19,17 +19,19 @@ const createPost = async (req,res) => {
             console.log( 'User not found')
             return res.status(404).json({ message: 'User not found' });
         }
-        // console.log(req.files, '==========')
+        console.log(req.files, '==========')
         // console.log(req.file, '00000000000==========')
         // console.log(req, '------------------------------00000000000==========')
-        // const imagePaths = req.files.map(file => file.path);
+        // console.log(images[0], 'zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz')
+        const imagePaths = req.files.map(file => file.path);
+        console.log(imagePaths)
+
         const newPost = await Post.create({
             title,
-            // images:imagePaths,
+            images:imagePaths,
             // images:req.file.path,
             description,
             pricePerNight,
-            availableDates,
             propertyDetails: {
                 bedrooms,bathrooms,guests,beds,kitchen
             },

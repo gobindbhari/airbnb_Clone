@@ -1,22 +1,26 @@
-const instance = require('../index')
-const stripe = require('stripe')('sk_test_...');
+// const instance = require('../index')
+const stripe = require('stripe')('sk_test_51QZuM9A063PqOtY5TQ9IW0NM0BP6T1OrwS0APlaCcO4kePH7L7XzGLqiyZjN8HwjwHcwpFPt7mCP3mEOeeJBjjvx00BjUVkgYI');
 
 
 const createOrderId = async (req, res) => {
   try {
-    const { id, email, cost } = req.body
-    if (!id || !email || !cost) return res.json({ message: 'Id, cost and Email are required' })
+    const { roomId, userId, cost, email } = req.body
+    console.log('mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm', roomId , userId , cost)
+    if (!roomId || !userId || !cost) return res.status(400).json({ message: 'Id, cost and Email are required' })
     const product = await stripe.products.create({
-      id: id,
-      email: email
+      name :`product name`,
+      metadata: {              // Store custom data in metadata
+        userId: `${userId}`,
+        postId: `${roomId}`,
+      }
     })
-    if(product) return res.json({ message: 'Product is not created' }) 
-      const price = await stripe.price.create({
+    if(!product.id) return res.json({ message: 'Product is not created', product : product }) 
+      const price = await stripe.prices.create({
         product: `${product.id}`,
         unit_amount: cost * 100,
-        curreny: 'inr'
+        currency: 'inr'
       })
-    if (price.id)return res.json({message: 'price.id is not generated'})
+    if (!price.id)return res.json({message: 'price.id is not generated'})
     const session = await stripe.checkout.sessions.create({
       line_items:[
         {
@@ -27,13 +31,14 @@ const createOrderId = async (req, res) => {
       mode:'payment',
       success_url: 'http://localhost:5500/success',
       success_url: 'http://localhost:5500/cancel',
-      customer_url: `${email}`
+      customer_email : `${email}`
+      // customer_email : 'test@test.com'
     })
     return res.json({session})
   } catch (error) {
-
+    console.log(error)
   }
 }
 
 
-exports = { createOrderId, }
+module.exports = { createOrderId }

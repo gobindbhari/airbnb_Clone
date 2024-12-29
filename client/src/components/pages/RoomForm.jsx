@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
 import axios from 'axios';
 import { toast } from 'react-toastify';
@@ -18,27 +18,107 @@ const RoomForm = () => {
 
     const notify = (e) => toast(e);
     const {id} = useParams()
+    const [files, setfiles] = useState([])
 
     
     const { register, handleSubmit, formState: { errors } } = useForm();
 
+    const handleChange = (e)=>{
+        // e.preventDefault()
+        setfiles(e.target.files)
+    }
+
+    // const onSubmit = async (data) => {
+        
+    //     // debugger
+    //     try {
+    //         const arrImages = new FormData()
+    //         const formData = new FormData()
+    //         console.log('11111111111111111111111',data.images)
+    //         Array.from(data.images).forEach( file => {
+    //             arrImages.append('file', file)
+    //         })
+    //          delete data.images
+    //         const newData = { ...data, hostedby:id }
+    //     console.log("New Data:", newData);
+    //     console.log("daaaaaaaaaaaaaaaa:", arr);
+    //     // console.log("F000000000000000000:", newData.images[0]);
+
+    //     const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/post/create/${id}`,formData={...newData , images: arrImages}, 
+    //         {headers: {
+    //         'Content-Type': 'multipart/form-data',
+    //       }}
+    //     )
+    //     if (response.status === 200 || response.status === 201 ) {
+    //         toast("Post is successfully created")
+    //     } else {
+    //         console.log(response)
+    //     } 
+    // } catch (error) {
+    //     console.log(error)
+    //     toast(error.response.data.message)
+    //     }
+    // };
+
     const onSubmit = async (data) => {
-        debugger
         try {
-            const newData = { ...data, hostedby:id}
-        console.log("Form Data:", newData);
-        const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/post/create/${id}`,newData)
-        if (response.status === 200 || response.status === 201 ) {
-            toast("Post is successfully created")
-        } else {
-            console.log(response)
-        } 
-    } catch (error) {
-        console.log(error)
-        toast(error.response.data.message)
+            const formData = new FormData();
+            
+            // Append regular form data
+            formData.append("title", data.title);
+            formData.append("description", data.description);
+            formData.append("pricePerNight", data.pricePerNight);
+            formData.append("category", data.category);
+            formData.append("hostedby", id);
+    
+            // Append property details
+            formData.append("bedrooms", data.propertyDetails.bedrooms);
+            formData.append("bathrooms", data.propertyDetails.bathrooms);
+            formData.append("guests", data.propertyDetails.guests);
+            formData.append("beds", data.propertyDetails.beds);
+            formData.append("kitchen", data.propertyDetails.kitchen);
+    
+            // Append address details
+            formData.append("pincode", data.address.pincode);
+            formData.append("country", data.address.country);
+            formData.append("street", data.address.street);
+            formData.append("state", data.address.state);
+            formData.append("town", data.address.town);
+            formData.append("district", data.address.district);
+    
+            // Append available dates
+            formData.append("startDate", data.availableDates.startDate);
+            formData.append("endDate", data.availableDates.endDate);
+    
+            // Append images (multiple files)
+            if (data.images && data.images.length > 0) {
+                Array.from(data.images).forEach(file => {
+                    formData.append("images", file);
+                });
+            }
+    
+            // Send data to the backend
+            const response = await axios.post(
+                `${import.meta.env.VITE_BACKEND_URL}/post/create/${id}`,
+                formData,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                }
+            );
+    
+            if (response.status === 200 || response.status === 201) {
+                toast("Post is successfully created");
+            } else {
+                toast("Failed to create post");
+            }
+        } catch (error) {
+            console.error(error);
+            toast(error.response?.data?.message || "An error occurred");
         }
     };
-
+    
     return (
         <form
             onSubmit={handleSubmit(onSubmit)}
@@ -225,7 +305,9 @@ const RoomForm = () => {
                 <label className="block text-sm font-medium text-gray-700">Images</label>
                 <input
                     type="file"
+                    id='files'
                     {...register("images")}
+                    // onChange={()=>handleChange()}
                     multiple 
                     className="mt-1 block w-full border-gray-300 rounded-full shadow-sm outline-none py-2 px-3 sm:text-sm"
                 />

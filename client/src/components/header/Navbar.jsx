@@ -90,6 +90,7 @@ const Navbar = () => {
 
     const handleClick = () => {
         VerifyUser ? navigate(`/host-home/${id}`) : (setSignShow(true),
+        window.scrollTo({top:0, behavior: 'smooth'}),
             setIsOpen(false))
     }
 
@@ -117,8 +118,8 @@ const Navbar = () => {
 
                         {/* second */}
                         {navcon ?
-                            (<div className='flex flex-col justify-center h-full  pt-2 lg:visible'>
-                                <div className='flex justify-center mb-3 gap-3 text-lg max-lg:hidden '>
+                            (<div className='flex flex-col justify-center h-full  pt-2 lg:visible '>
+                                <div className='flex justify-center mb-3 gap-3 text-lg max-lg:hidden duration-500'>
                                     <div>
                                         <button className='w-16 py-1'>Stays</button>
                                     </div>
@@ -130,8 +131,10 @@ const Navbar = () => {
 
                             </div>)
                             : (
-                                <div className="outline outline-2 outline-slate-200  rounded-full ml-20 max-lg:hidden">
-                                    <div className="w-full h-12 flex gap-2 pl-3 px-2 justify-between items-center">
+                                <div 
+                                // data-aos="bottom-top" data-aos-duration="1000" 
+                                className="outline outline-2 outline-slate-200  rounded-full ml-20 max-lg:hidden py-2">
+                                    <div className="w-full h-12 flex gap-2 pl-3 px-2 justify-between items-center duration-[500ms]">
                                         <div className="border-r-2 pr-5"><button>Anywhere</button></div>
                                         {/* <div className="border-r-2 h-[80%] w-1 my-auto"></div> */}
                                         <div className="border-r-2 pr-5"><button>Any Week</button></div>
@@ -159,10 +162,10 @@ const Navbar = () => {
                             {/* Dropdown menu */}
                             <div className="">
                                 {isOpen && (
-                                    <div className="absolute right-10 z-10 mt-16 w-48 origin-top-right bg-white border border-gray-300 rounded-md shadow-lg">
+                                    <div className="absolute right-10 z-10 mt-16 w-48 origin-top-right bg-white border border-gray-300 rounded-md shadow-lg ">
                                         <div className="py-1">
                                             {!VerifyUser ? <> <button
-                                                onClick={() => { setSignupShow(true), setIsOpen(false), setIsOpen(false) }}
+                                                onClick={() => { setSignupShow(true), setIsOpen(false), setIsOpen(false), window.scrollTo({top:0,behavior:'smooth'}) }}
                                                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-start"
                                             >
                                                 Sign up
@@ -220,7 +223,7 @@ const Navbar = () => {
 
                     {/* second Down */}
                     <div className={navcon ? 'visible' : 'hidden '}>
-                        <div className="w-[750px] mx-auto max-lg:hidden ">
+                        <div className="w-[750px] mx-auto max-lg:hidden duration-[2000ms]">
                             <div className="max-lg:invisible  top-20 -left-[25vw] outline outline-1 outline-slate-200 rounded-full shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] font-medium w-fit">
                                 <div className='  w-fit flex items-center h-[70px]'>
 

@@ -41,7 +41,7 @@ const SignUp = () => {
             <div className="flex flex-col items-center justify-center  py-8 mx-auto md:h-screen lg:py-0">
                 <div className="w-full bg-white rounded-lg shadow pb-5 relative md:mt-0 sm:max-w-md xl:p-0 ">
                     <button onClick={() => blockdisplay()} className='p-2'>
-                        <img className=' object-center' src="public\images\signin\cancel.svg" alt="" />
+                        <img className=' object-center' src="/images/signin/cancel.svg" alt="" />
                     </button>
                     <div className="px-6 space-y-4 md:space-y-6 sm:p-8">
                         <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
@@ -68,7 +68,7 @@ const SignUp = () => {
                                     <button type='button' className='px-3' onClick={(event) => {
                                         event.preventDefault(); // Stops form submission
                                         setTypePW(!typePW);
-                                    }}>{typePW ? (<img src="public\images\signin\closeeye.svg" alt="" />) : (<img src="public\images\signin\openeye.svg" alt="" />)}</button>
+                                    }}>{typePW ? (<img src="\images\signin\closeeye.svg" alt="" />) : (<img src="\images\signin\openeye.svg" alt="" />)}</button>
 
                                 </div>
 
