@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form"
 import { useSelector, useDispatch } from 'react-redux'
 
 
+
 const Rooms = () => {
 
   const { id } = useParams()
@@ -30,6 +31,7 @@ const Rooms = () => {
     const data = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/post/${id}`);
     console.log("dtaaaaaaaaaaaaaaaaaa",data.data)
     setFetchData(data.data)
+    setImages([data.data.images])
     setAddress(data.data.address)
     setPropertyDetails(data.data.propertyDetails)
     setAvailableDates(data.data.availableDates)
@@ -57,7 +59,11 @@ const Rooms = () => {
   const onSubmit = async (data) => {
     try {
       // debugger
-      if(!VerifyUser)  return toast.error('Please login your account')
+      if(!VerifyUser) return toast.error('Please login your account')
+        console.log('rrrrrrrrrrr',data.guests)
+        console.log('qqqqqqqqqqqq',data.guests.length)
+      if(data.startDate.length == 0 || data.endDate.length == 0 || data.guests.length == 0 ) return toast.error('Please fill form')
+
       console.log('uuuuuuuuuuuuuuuuuu',data)
       const sdate = new Date(data.startDate)
       const edate = new Date(data.endDate)
@@ -83,8 +89,8 @@ const Rooms = () => {
       console.log('-------------------',paydata.data)
       console.log('-------------------uuuuuuuuuuuuu',paydata.data.session.url)
 
-      // navigate(paydata.data.session.url)
-      window.location.href = paydata.data.session.url;
+      // window.location.href = paydata.data.session.url;
+      
       reset({
         startDate: null,
         endDate: null,
@@ -99,6 +105,7 @@ const Rooms = () => {
 // if(!load){
 //   return<div>
 //     loading....</div>}
+console.log('hhhhhhhhhhhhhhhhh',images)
 
   return (
     <>
@@ -110,7 +117,11 @@ const Rooms = () => {
 
         {/* Images Section */}
         <div className="">
-        <img src={'https://img.freepik.com/premium-photo/random-best-photo_865967-91215.jpg?w=740'} alt="" />
+          {console.log('ffffffffffffffffffffffffff',`${import.meta.env.VITE_BACKEND_URL}/${images[0]}`)}
+          {/* {console.log('ffffffffffffffffffffffffff',`${images[0]}`)} */}
+          {/* {console.log('mmmmmmmmmmmmmmmmmmm',images[0])} */}
+        <img src={images.length != 0 ? `${import.meta.env.VITE_BACKEND_URL}/${images[0]}`: 'https://img.freepik.com/premium-photo/random-best-photo_865967-91215.jpg?w=740'} alt="" />
+        {/* <img src={ `${images[0]}` || 'https://img.freepik.com/premium-photo/random-best-photo_865967-91215.jpg?w=740'} alt="" /> */}
         </div>
         {/* <div class="swiper mySwiper">
           <div class="swiper-wrapper">

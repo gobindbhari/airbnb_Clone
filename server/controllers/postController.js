@@ -65,6 +65,18 @@ const getAllPost = async (req,res) => {
     }    
 }
 
+const categoryPost = async (req,res) => {
+    try {
+        const {category} = req.params
+        console.log("categoryyyyyy", category)
+        const data = await Post.find({category : category})
+        // console.log(data,"rvaan")
+        return res.send(data)
+    } catch (error) {
+        return res.status(500).json({ message: 'Error in getAllPost postcontroller, please try again later',error }); 
+    }    
+}
+
 const postById = async (req,res) => {
     try {
         const {id}= req.params
@@ -76,4 +88,4 @@ const postById = async (req,res) => {
 }
 
 
-module.exports = {createPost, getAllPost, postById}
+module.exports = {createPost, getAllPost, postById, categoryPost}

@@ -8,11 +8,14 @@ import 'swiper/css/pagination';
 import '../../App.css'
 
 import { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper/modules';
+import { useNavigate } from 'react-router-dom';
 
 
 const NavDownBox = () => {
 
   const [slidesPerView, setSlidesPerView] = useState(getSlidesPerView());
+
+  const navigate = useNavigate()
 
   const slides = [
     { src: "/images/navbar/navdownbox/icon.webp", label: "Icons" },
@@ -84,10 +87,13 @@ const NavDownBox = () => {
     };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
+    
   });
 
   const handleData = async (e)=> {
-    
+    console.log(`category=${e}`)
+    // navigate(`category=${e}`)
+    navigate(`${e}`)
   }
   
     return (
@@ -110,7 +116,7 @@ const NavDownBox = () => {
         <SwiperSlide key={index}>
           <div onClick={()=>handleData(slide.label)} className="group cursor-pointer -mt-3 max-sm:mt-0 max-sm:-mx-1">
           <img className='group p-6 max-lg:p-3 min-[768px]:scale-110  max-sm:p-1 max-md:p-2 max-xl:p-4 font-normal max-lg:text-base  ml-[2px]' src={slide.src} alt={slide.label} />
-          <div className="text-xs font-semibold max-sm:text-[10px]  group-hover:border-t-2 hover:border-t-2 duration-100" >{slide.label}</div>
+          <div className="text-xs font-semibold max-sm:text-[10px]  group-hover:border-t-2 hover:border-t-2" >{slide.label}</div>
           </div>
         </SwiperSlide>
       ))}
@@ -118,21 +124,27 @@ const NavDownBox = () => {
         </div>
 
 
-    //   <div className="w-fit flex space-x-4">
-    //   {slides.map((e, i) => (
-    //     <div className="flex flex-col items-center" key={i}>
-    //       <div className="h-20 w-20">
-    //         <img
-    //           className="object-cover rounded-md"
-    //           src={e.src}
-    //           alt={e.label}
-    //         />
-    //       </div>
-    //       <p className="mt-2 text-sm font-medium">{e.label}</p>
-    //     </div>
-    //   ))}
-    // </div>
+    
     )
 }
 
 export default NavDownBox
+
+//    Skeleton
+
+{/* <div key={id} className="w-[290px] bg-white mb-4 rounded-lg shadow-md overflow-hidden mx-1"> */}
+  {/* <div className="relative"> */}
+    {/* Skeleton Loader for Image */}
+    {/* <div className="w-full h-72 bg-gray-300 animate-pulse rounded-xl" /> */}
+    {/* <div className="absolute bottom-0 left-0 w-full p-4"> */}
+      {/* Skeleton Loader for Title */}
+      {/* <div className="bg-gray-300 w-3/4 h-6 mb-2 animate-pulse rounded"></div> */}
+    {/* </div> */}
+  {/* </div> */}
+  {/* <div className="px-4 py-2 text-start"> */}
+    {/* Skeleton Loader for Description */}
+    {/* <div className="bg-gray-300 w-full h-4 mb-2 animate-pulse rounded"></div> */}
+    {/* Skeleton Loader for Price */}
+    {/* <div className="bg-gray-300 w-1/2 h-4 animate-pulse rounded"></div> */}
+  {/* </div> */}
+{/* </div> */}

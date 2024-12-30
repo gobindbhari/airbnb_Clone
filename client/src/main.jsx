@@ -20,6 +20,7 @@ import SignUp from './components/authrization/SignUp.jsx';
 import Rooms from './components/pages/Rooms.jsx'
 import RoomForm from './components/pages/RoomForm.jsx'
 import axios from 'axios'
+import Category from './components/pages/Category.jsx'
 
 
 
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Home />
+      },
+      {
+        path: '/:category',
+        element: <Category />
       },
       {
         path: '/signin',

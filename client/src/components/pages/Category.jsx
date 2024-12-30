@@ -3,7 +3,7 @@ import Card from '../cards/Card'
 import axios from 'axios';
 import { useLocation, useParams } from 'react-router-dom';
 
-const Home = () => {
+const Category = () => {
   const [fetechData, setFetechData] = useState([])
 
   const {category} = useParams()
@@ -11,8 +11,6 @@ const Home = () => {
   
   const getdata = async () => {
    try {
-    // debugger
-    // console.log('lllllllllllllllllllllllllllllll')
     const data = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/post/allpost`);
     // const data = await axios('http://localhost:5500/post/allpost')
     console.log('data is recevied',data)
@@ -21,12 +19,11 @@ const Home = () => {
     console.log('eeeerrrrrrrrrrrr',error)
    }
   }
-  const categorydata = async () => {
+  const categorydata = async (e) => {
    try {
     // debugger
-    // console.log('lllllllllllllllllllllllllllllll')
-    const data = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/post/${category}`);
-    // const data = await axios('http://localhost:5500/post/allpost')
+    console.log('lllllllllllllllllllllllllllllll', e)
+    const data = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/post/category/${e}`);
     console.log('data is recevied',data)
     setFetechData(data.data)
    } catch (error) {
@@ -35,12 +32,9 @@ const Home = () => {
   }
 
   useEffect(() => {
-    // debugger
-    console.log('ccccccccccccccc', category)
-    console.log('pathhhhhhhh', location.pathname)
-    // categorydata(category)
-    location.pathname == '/' ? getdata() : categorydata(category)
-  }, [])
+    // console.log('pathhhhhhhh', location.pathname)
+    categorydata(category)
+  },[location.pathname,category])
   return (
    <>
     <div className='mt-[21vw] [425px]:mt-[50vw] max-[425px]:mt-[45vw] max-[375px]:mt-[50vw] flex flex-wrap justify-evenly gap-2 '>
@@ -57,4 +51,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default Category

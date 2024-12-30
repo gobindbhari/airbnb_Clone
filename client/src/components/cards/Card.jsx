@@ -19,12 +19,12 @@ const Card = ({ id, title, description, pricePerNight, images }) => {
           alt="Room"
           className="w-full h-72 object-cover rounded-xl hover:scale-105 duration-[700ms] "
         />
-        <div className="absolute bottom-0 left-0 w-full p-4 ">
-          <div className="bg-transparent"><p className="text-white text-lg text-start font-bold line-clamp-2">{title}</p></div>
+        <div className="absolute bottom-0 left-0 w-fit p-4 ">
+          <div className="bg-transparent"><p className="text-white text-lg text-start font-bold line-clamp-1">{title}</p></div>
         </div>
       </div>
       <div className="px-4 py-2 text-start">
-        <p className="text-gray-800 text-base font-medium line-clamp-2">{description}</p>
+        <p className="text-gray-800 text-base font-medium line-clamp-1">{description}</p>
         <p className="text-gray-500 text-sm font-semibold">Price : {pricePerNight}</p>
       </div>
     </div>

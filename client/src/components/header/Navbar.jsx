@@ -27,22 +27,20 @@ const Navbar = () => {
 
 
     const getdata = async (e) => {
-        const User = await axios(`${import.meta.env.VITE_BACKEND_URL}/user/${e}`, {
-            withCredentials: true
-        })
+        const User = await axios(`${import.meta.env.VITE_BACKEND_URL}/user/${e}`)
         console.log(User)
         User ? dispatch(setAllow()) : dispatch(setNotAllow())
     }
     useEffect(() => {
         let user = localStorage.getItem('user') || null
-        console.log(user, 'ooooooooooooooooooo')
+        console.log(user, 'user is logged in this device')
         getdata(user)
         setId(user)
     }, [dispatch])
 
     useEffect(() => {
         let user = localStorage.getItem('user') || null
-        console.log(user, 'llllllllllllllllllllll')
+        console.log(user, 'user is logged in this device')
         getdata(user)
         setId(user)
     })
@@ -89,18 +87,20 @@ const Navbar = () => {
     }
 
     const handleClick = () => {
-        VerifyUser ? navigate(`/host-home/${id}`) : (setSignShow(true),
+        VerifyUser ? (navigate(`/host-home/${id}`), setIsOpen(false)) : (setSignShow(true),
         window.scrollTo({top:0, behavior: 'smooth'}),
-            setIsOpen(false))
+        // setIsOpen(false)
+        setIsOpen(isOpen ? false : true)
+    )
     }
 
     const handleMenu = () => {
         setIsOpen(isOpen ? false : true)
         setSignShow(false)
         setSignupShow(false)
-        setTimeout(() => {
-            setIsOpen(false)
-        }, 3000);
+        // setTimeout(() => {
+        //     setIsOpen(false)
+        // }, 3000);
     }
 
     return (
