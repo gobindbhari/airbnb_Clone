@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Card from '../cards/Card'
 import axios from 'axios';
 import { useLocation, useParams } from 'react-router-dom';
+import SkeletonCard from '../cards/SkeletonCard';
 
 const Category = () => {
   const [fetechData, setFetechData] = useState([])
