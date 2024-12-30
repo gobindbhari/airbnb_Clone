@@ -1,6 +1,6 @@
 import React from 'react'
 
-const SkeletonCard = () => {
+const SkeletonCard = (id) => {
   return (
     <>
     <div key={id} className="w-[290px] bg-white mb-4 rounded-lg shadow-md overflow-hidden mx-1">

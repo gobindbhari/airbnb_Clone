@@ -7,9 +7,6 @@ import SkeletonCard from '../cards/SkeletonCard';
 const Home = () => {
   const [fetechData, setFetechData] = useState([])
   const [load, setLoad] = useState(false)
-
-  const {category} = useParams()
-  const location = useLocation()
   
   const getdata = async () => {
    try {
@@ -33,12 +30,12 @@ const Home = () => {
   if(!load){
     return <>
      <div className='mt-[21vw] [425px]:mt-[50vw] max-[425px]:mt-[45vw] max-[375px]:mt-[50vw] flex flex-wrap justify-evenly gap-2 '>
-    <SkeletonCard/>
-    <SkeletonCard/>
-    <SkeletonCard/>
-    <SkeletonCard/>
-    <SkeletonCard/>
-    <SkeletonCard/>
+    <SkeletonCard id={1}/>
+    <SkeletonCard id={2}/>
+    <SkeletonCard id={3}/>
+    <SkeletonCard id={4}/>
+    <SkeletonCard id={5}/>
+    <SkeletonCard id={6}/>
     </div>
     </>
   }
