@@ -18,8 +18,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use(cors({
-  // origin: 'http://localhost:5173', // Frontend URL
-  origin: 'https://airbnb-clone-one-tan.vercel.app', // Frontend URL
+  origin: 'http://localhost:5173', // Frontend URL
+  // origin: 'https://airbnb-clone-one-tan.vercel.app', // Frontend URL
    // credentials: true, // Allow cookies to be sent
 }))
 

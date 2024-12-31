@@ -86,16 +86,16 @@ const Rooms = () => {
         formData : data,
          cost : price
       })
-      console.log('-------------------',paydata.data)
+      console.log('-------------------',paydata.data.session)
       console.log('-------------------uuuuuuuuuuuuu',paydata.data.session.url)
 
-      // window.location.href = paydata.data.session.url;
+      window.location.href = paydata.data.session.url;
       
-      reset({
-        startDate: null,
-        endDate: null,
-        guests: null,
-      })
+      // reset({
+      //   startDate: null,
+      //   endDate: null,
+      //   guests: null,
+      // })
       // paydata.status == 200 && toast('successfully payment send data')
     } catch (error) {
       console.log('eeeeeeeeeeeeeeeeeeeeeee',error)
