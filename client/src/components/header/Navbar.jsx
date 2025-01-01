@@ -105,7 +105,7 @@ const Navbar = () => {
 
     return (
         <>
-            <header className='top-0 w-screen fixed bg-white z-10 max-h-80 min-h-44' >
+            <header className='top-0 sticky w-screen  bg-white z-10 max-h-80 min-h-44' >
                 <nav className='mx-9 my-2 font-semibold  max-md:mr-2 max-md:ml-3 '>
                     <div className='flex justify-between'>
 
