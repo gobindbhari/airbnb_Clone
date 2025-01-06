@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import NavDownBox from './NavDownBox'
-import gsap from 'gsap'
 import SignIn from '../authrization/SignIn'
 import SignUp from '../authrization/SignUp'
 
@@ -105,9 +104,9 @@ const Navbar = () => {
 
     return (
         <>
-            <header className='top-0 sticky w-screen  bg-white z-10 max-h-80 min-h-44' >
+            <header className='top-0 sticky w-screen my-auto bg-white z-10 max-h-80 min-h-44' >
                 <nav className='mx-9 my-2 font-semibold  max-md:mr-2 max-md:ml-3 '>
-                    <div className='flex justify-between'>
+                    <div className='flex justify-between pt-2'>
 
                         {/* first */}
                         <div>
@@ -152,7 +151,7 @@ const Navbar = () => {
                         {/* third */}
                         <div className='flex gap-4 justify-center align-middle h-full'>
                             <div className='flex gap-2 justify-center '>
-                                <h3 className='m-auto hover:bg-slate-100 rounded-3xl px-3 py-2'>Airbnb your home </h3>
+                                <h3 className='m-auto hover:bg-slate-100 rounded-3xl px-3 py-2'>Homenest your home </h3>
                                 <button className='hover:bg-slate-100 rounded-full px-2'><img className='h-4 m-auto' src="/images/navbar/earth.svg" alt="" /></button>
                             </div>
                             <button onClick={() => handleMenu()} className=' flex gap-2 rounded-full px-4 py-2 h-12 outline outline-slate-300 outline-1 hover:shadow-[0_3px_10px_rgb(0,0,0,0.2)]'>
@@ -198,7 +197,7 @@ const Navbar = () => {
                                                 onClick={() => handleClick()}
                                                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                             >
-                                                Airbnb your home
+                                                Homenest your home
                                             </button>
                                             <NavLink
                                                 to="/host-an-experience"

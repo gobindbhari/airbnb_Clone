@@ -31,7 +31,7 @@ const Rooms = () => {
     const data = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/post/${id}`);
     console.log("dtaaaaaaaaaaaaaaaaaa",data.data)
     setFetchData(data.data)
-    setImages([data.data.images])
+    setImages(data.data.images)
     setAddress(data.data.address)
     setPropertyDetails(data.data.propertyDetails)
     setAvailableDates(data.data.availableDates)
@@ -109,7 +109,7 @@ console.log('hhhhhhhhhhhhhhhhh',images)
 
   return (
     <>
-      <div className="max-w-6xl mx-auto px-4 py-6 mt-[20vw]">
+      <div className="max-w-6xl mx-auto px-4 py-6 mt-4">
         {/* Title */}
         <h1 className="text-3xl font-bold mb-4">
           {fetchData.title}
@@ -118,22 +118,11 @@ console.log('hhhhhhhhhhhhhhhhh',images)
         {/* Images Section */}
         <div className="">
           {console.log('ffffffffffffffffffffffffff',`${import.meta.env.VITE_BACKEND_URL}/${images[0]}`)}
-          {/* {console.log('ffffffffffffffffffffffffff',`${images[0]}`)} */}
-          {/* {console.log('mmmmmmmmmmmmmmmmmmm',images[0])} */}
+          
         <img src={images.length != 0 ? `${import.meta.env.VITE_BACKEND_URL}/${images[0]}`: 'https://img.freepik.com/premium-photo/random-best-photo_865967-91215.jpg?w=740'} alt="" />
         {/* <img src={ `${images[0]}` || 'https://img.freepik.com/premium-photo/random-best-photo_865967-91215.jpg?w=740'} alt="" /> */}
         </div>
-        {/* <div class="swiper mySwiper">
-          <div class="swiper-wrapper">
-            {images.map((e) => {
-              return <div class="swiper-slide">
-                <img src={'https://img.freepik.com/premium-photo/random-best-photo_865967-91215.jpg?w=740'} alt="" />
-              </div>
-            })}
-          </div>
-          <div class="swiper-pagination"></div>
-        </div> */}
-
+        
         {/* Description Section */}
         <div className="mt-6">
           <p className="text-lg text-gray-700 font-semibold">

@@ -35,7 +35,7 @@ const createOrderId = async (req, res) => {
         }
       ],
       mode:'payment',
-      success_url : `http://localhost:5500/payment/success/${session.id}`,
+      success_url : `http://localhost:5500/payment/success`,
       cancel_url : 'http://localhost:5500/payment/cancel',
       customer_email : `${email}`
       // customer_email : 'test@test.com'

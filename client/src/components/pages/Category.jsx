@@ -32,7 +32,8 @@ const Category = () => {
 
   if(!load){
     return <>
-     <div className='mt-[21vw] [425px]:mt-[50vw] max-[425px]:mt-[45vw] max-[375px]:mt-[50vw] flex flex-wrap justify-evenly gap-2 '>
+     <div className='mt-4 flex flex-wrap justify-evenly gap-2 '>
+     {/* <div className='mt-[21vw] [425px]:mt-[50vw] max-[425px]:mt-[45vw] max-[375px]:mt-[50vw] flex flex-wrap justify-evenly gap-2 '> */}
      <SkeletonCard id={1}/>
     <SkeletonCard id={2}/>
     <SkeletonCard id={3}/>
@@ -45,7 +46,8 @@ const Category = () => {
 
   return (
    <>
-    <div className='mt-[21vw] [425px]:mt-[50vw] max-[425px]:mt-[45vw] max-[375px]:mt-[50vw] flex flex-wrap justify-evenly gap-2 '>
+    <div className='mt-4 flex flex-wrap justify-evenly gap-2 '>
+    {/* <div className='mt-[21vw] [425px]:mt-[50vw] max-[425px]:mt-[45vw] max-[375px]:mt-[50vw] flex flex-wrap justify-evenly gap-2 '> */}
       {fetechData.map((e)=>{
         return <Card
            id={e._id}

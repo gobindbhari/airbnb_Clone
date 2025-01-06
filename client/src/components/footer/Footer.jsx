@@ -41,19 +41,19 @@ const Footer = () => {
       {/* Bottom Section */}
       <div className="flex flex-col md:flex-row justify-between items-center">
         <div className="flex space-x-6">
-          <a href="#" className="hover:underline">
-            © 2024 Airbnb, Inc.
+          <a href="/" className="hover:underline">
+            © 2025 Homenest, Inc.
           </a>
-          <a href="#" className="hover:underline">
+          <a href="/" className="hover:underline">
             Privacy
           </a>
-          <a href="#" className="hover:underline">
+          <a href="/" className="hover:underline">
             Terms
           </a>
-          <a href="#" className="hover:underline">
+          <a href="/" className="hover:underline">
             Sitemap
           </a>
-          <a href="#" className="hover:underline">
+          <a href="/" className="hover:underline">
             Company details
           </a>
         </div>
@@ -65,13 +65,13 @@ const Footer = () => {
             </div>
             <div>₹ INR</div>
             <div className="flex space-x-3">
-              <a href="#" className="hover:underline">
+              <a href="/" className="hover:underline">
                 Facebook
               </a>
-              <a href="#" className="hover:underline">
+              <a href="/" className="hover:underline">
                 Twitter
               </a>
-              <a href="#" className="hover:underline">
+              <a href="/" className="hover:underline">
                 Instagram
               </a>
             </div>

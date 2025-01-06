@@ -122,7 +122,7 @@ const RoomForm = () => {
     return (
         <form
             onSubmit={handleSubmit(onSubmit)}
-            className="max-w-4xl mx-auto mt-72 mb-20 p-6 bg-blue-100 rounded-lg shadow-md space-y-6"
+            className="max-w-4xl mx-auto mt-4 mb-20 p-6 bg-blue-100 rounded-lg shadow-md space-y-6"
         >
             <h1 className="text-2xl font-semibold text-gray-800">Create a New Post</h1>
 
